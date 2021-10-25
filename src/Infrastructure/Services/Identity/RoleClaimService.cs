@@ -19,13 +19,13 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Services.Identity
         private readonly IStringLocalizer<RoleClaimService> _localizer;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        private readonly BlazorHeroContext _db;
+        private readonly ApplicationDbContext _db;
 
         public RoleClaimService(
             IStringLocalizer<RoleClaimService> localizer,
             IMapper mapper,
             ICurrentUserService currentUserService,
-            BlazorHeroContext db)
+            ApplicationDbContext db)
         {
             _localizer = localizer;
             _mapper = mapper;

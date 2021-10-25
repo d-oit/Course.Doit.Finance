@@ -13,12 +13,12 @@ using BlazorHero.CleanArchitecture.Domain.Entities.Misc;
 
 namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
 {
-    public class BlazorHeroContext : AuditableContext
+    public class ApplicationDbContext : AuditableContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTimeService _dateTimeService;
 
-        public BlazorHeroContext(DbContextOptions<BlazorHeroContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
             : base(options)
         {
             _currentUserService = currentUserService;

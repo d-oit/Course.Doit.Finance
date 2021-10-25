@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Application.Extensions;
+﻿using BlazorHero.CleanArchitecture.Application.Extensions;
 using BlazorHero.CleanArchitecture.Application.Interfaces.Repositories;
 using BlazorHero.CleanArchitecture.Application.Interfaces.Services;
 using BlazorHero.CleanArchitecture.Application.Specifications.Catalog;
@@ -11,6 +7,10 @@ using BlazorHero.CleanArchitecture.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BlazorHero.CleanArchitecture.Application.Features.Brands.Queries.Export
 {
@@ -52,6 +52,7 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Brands.Queries.Expor
                 { _localizer["Description"], item => item.Description },
                 { _localizer["Tax"], item => item.Tax }
             }, sheetName: _localizer["Brands"]);
+
 
             return await Result<string>.SuccessAsync(data: data);
         }

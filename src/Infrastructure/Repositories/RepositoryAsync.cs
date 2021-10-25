@@ -10,9 +10,9 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Repositories
 {
     public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : AuditableEntity<TId>
     {
-        private readonly BlazorHeroContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public RepositoryAsync(BlazorHeroContext dbContext)
+        public RepositoryAsync(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }

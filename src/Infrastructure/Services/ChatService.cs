@@ -19,13 +19,13 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Services
 {
     public class ChatService : IChatService
     {
-        private readonly BlazorHeroContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
         private readonly IStringLocalizer<ChatService> _localizer;
 
         public ChatService(
-            BlazorHeroContext context,
+            ApplicationDbContext context,
             IMapper mapper,
             IUserService userService,
             IStringLocalizer<ChatService> localizer)

@@ -19,14 +19,14 @@ namespace BlazorHero.CleanArchitecture.Infrastructure
     {
         private readonly ILogger<DatabaseSeeder> _logger;
         private readonly IStringLocalizer<DatabaseSeeder> _localizer;
-        private readonly BlazorHeroContext _db;
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<BlazorHeroUser> _userManager;
         private readonly RoleManager<BlazorHeroRole> _roleManager;
 
         public DatabaseSeeder(
             UserManager<BlazorHeroUser> userManager,
             RoleManager<BlazorHeroRole> roleManager,
-            BlazorHeroContext db,
+            ApplicationDbContext db,
             ILogger<DatabaseSeeder> logger,
             IStringLocalizer<DatabaseSeeder> localizer)
         {

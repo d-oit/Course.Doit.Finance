@@ -1,15 +1,13 @@
 ﻿using BlazorHero.CleanArchitecture.Application.Interfaces.Services;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
+using BlazorHero.CleanArchitecture.Shared.Wrapper;
+using ClosedXML.Excel;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Localization;
-using System.IO;
-using System.Data;
-using BlazorHero.CleanArchitecture.Shared.Wrapper;
 
 namespace BlazorHero.CleanArchitecture.Infrastructure.Services
 {
@@ -22,123 +20,155 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Services
             _localizer = localizer;
         }
 
+        public async Task<byte[]> CreateTemplateAsync(IEnumerable<string> fields, string sheetName = "Sheet1")
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                workbook.Properties.Author = "";
+                var ws = workbook.Worksheets.Add(sheetName);
+                var colIndex = 1;
+                var rowIndex = 1;
+                foreach (var header in fields)
+                {
+                    var cell = ws.Cell(rowIndex, colIndex);
+                    var fill = cell.Style.Fill;
+                    fill.PatternType = XLFillPatternValues.Solid;
+                    fill.SetBackgroundColor(XLColor.LightBlue);
+                    var border = cell.Style.Border;
+                    border.BottomBorder =
+                        border.BottomBorder =
+                            border.BottomBorder =
+                                border.BottomBorder = XLBorderStyleValues.Thin;
+
+                    cell.Value = header;
+
+                    colIndex++;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    //var base64 = Convert.ToBase64String(stream.ToArray());
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return await Task.FromResult(stream.ToArray());
+                }
+            }
+        }
+
         public async Task<string> ExportAsync<TData>(IEnumerable<TData> data
             , Dictionary<string, Func<TData, object>> mappers
             , string sheetName = "Sheet1")
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using var p = new ExcelPackage();
-            p.Workbook.Properties.Author = "BlazorHero";
-            p.Workbook.Worksheets.Add(_localizer["Audit Trails"]);
-            var ws = p.Workbook.Worksheets[0];
-            ws.Name = sheetName;
-            ws.Cells.Style.Font.Size = 11;
-            ws.Cells.Style.Font.Name = "Calibri";
-
-            var colIndex = 1;
-            var rowIndex = 1;
-
-            var headers = mappers.Keys.Select(x => x).ToList();
-
-            foreach (var header in headers)
+            using (var workbook = new XLWorkbook())
             {
-                var cell = ws.Cells[rowIndex, colIndex];
-
-                var fill = cell.Style.Fill;
-                fill.PatternType = ExcelFillStyle.Solid;
-                fill.BackgroundColor.SetColor(Color.LightBlue);
-
-                var border = cell.Style.Border;
-                border.Bottom.Style =
-                    border.Top.Style =
-                        border.Left.Style =
-                            border.Right.Style = ExcelBorderStyle.Thin;
-
-                cell.Value = header;
-
-                colIndex++;
-            }
-
-            var dataList = data.ToList();
-            foreach (var item in dataList)
-            {
-                colIndex = 1;
-                rowIndex++;
-
-                var result = headers.Select(header => mappers[header](item));
-
-                foreach (var value in result)
+                workbook.Properties.Author = "";
+                var ws = workbook.Worksheets.Add(sheetName);
+                var colIndex = 1;
+                var rowIndex = 1;
+                var headers = mappers.Keys.Select(x => x).ToList();
+                foreach (var header in headers)
                 {
-                    ws.Cells[rowIndex, colIndex++].Value = value;
+                    var cell = ws.Cell(rowIndex, colIndex);
+                    var fill = cell.Style.Fill;
+                    fill.PatternType = XLFillPatternValues.Solid;
+                    fill.SetBackgroundColor(XLColor.LightBlue);
+                    var border = cell.Style.Border;
+                    border.BottomBorder =
+                        border.BottomBorder =
+                            border.BottomBorder =
+                                border.BottomBorder = XLBorderStyleValues.Thin;
+
+                    cell.Value = header;
+
+                    colIndex++;
+                }
+                var dataList = data.ToList();
+                foreach (var item in dataList)
+                {
+                    colIndex = 1;
+                    rowIndex++;
+
+                    var result = headers.Select(header => mappers[header](item));
+
+                    foreach (var value in result)
+                    {
+                        ws.Cell(rowIndex, colIndex++).Value = value;
+                    }
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    //var base64 = Convert.ToBase64String(stream.ToArray());
+                    stream.Seek(0, SeekOrigin.Begin);
+                    var byteArray = await Task.FromResult(stream.ToArray());
+                    return Convert.ToBase64String(byteArray);
                 }
             }
-
-            using (ExcelRange autoFilterCells = ws.Cells[1, 1, dataList.Count + 1, headers.Count])
-            {
-                autoFilterCells.AutoFilter = true;
-                autoFilterCells.AutoFitColumns();
-            }
-
-            var byteArray = await p.GetAsByteArrayAsync();
-            return Convert.ToBase64String(byteArray);
         }
 
-        public async Task<IResult<IEnumerable<TEntity>>> ImportAsync<TEntity>(Stream stream, Dictionary<string, Func<DataRow, TEntity, object>> mappers, string sheetName = "Sheet1")
+        public async Task<IResult<IEnumerable<TEntity>>> ImportAsync<TEntity>(Stream data, Dictionary<string, Func<DataRow, TEntity, object>> mappers, string sheetName = "Sheet1")
         {
-            var result =new List<TEntity>();
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using var p = new ExcelPackage();
-            stream.Position = 0;
-            await p.LoadAsync(stream);
-            var ws = p.Workbook.Worksheets[sheetName];
-            if (ws == null)
-            {
-                return await Result<IEnumerable<TEntity>>.FailAsync(string.Format(_localizer["Sheet with name {0} does not exist!"], sheetName));
-            }
 
-            var dt = new DataTable();
-            var titlesInFirstRow = true;
-            foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
+            using (var workbook = new XLWorkbook(data))
             {
-                dt.Columns.Add(titlesInFirstRow ? firstRowCell.Text : $"Column {firstRowCell.Start.Column}");
-            }
-            var startRow = titlesInFirstRow ? 2 : 1;
-            var headers = mappers.Keys.Select(x => x).ToList();
-            var errors = new List<string>();
-            foreach (var header in headers)
-            {
-                if (!dt.Columns.Contains(header))
+                if (!workbook.Worksheets.Contains(sheetName))
                 {
-                    errors.Add(string.Format(_localizer["Header '{0}' does not exist in table!"], header));
+                    return await Result<IEnumerable<TEntity>>.FailAsync(string.Format(_localizer["Sheet with name {0} does not exist!"], sheetName));
                 }
-            }
+                var ws = workbook.Worksheet(sheetName);
+                var dt = new DataTable();
+                var titlesInFirstRow = true;
 
-            if (errors.Any())
-            {
-                return await Result<IEnumerable<TEntity>>.FailAsync(errors);
-            }
-
-            for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
-            {
-                try
+                foreach (var firstRowCell in ws.Range(1, 1, 1, ws.LastCellUsed().Address.ColumnNumber).Cells())
                 {
-                    var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-                    DataRow row = dt.Rows.Add();
-                    var item = (TEntity)Activator.CreateInstance(typeof(TEntity));
-                    foreach (var cell in wsRow)
+                    dt.Columns.Add(titlesInFirstRow ? firstRowCell.GetString() : $"Column {firstRowCell.Address.ColumnNumber}");
+                }
+                var startRow = titlesInFirstRow ? 2 : 1;
+                var headers = mappers.Keys.Select(x => x).ToList();
+                var errors = new List<string>();
+                foreach (var header in headers)
+                {
+                    if (!dt.Columns.Contains(header))
                     {
-                        row[cell.Start.Column - 1] = cell.Text;
+                        errors.Add(string.Format(_localizer["Header '{0}' does not exist in table!"], header));
                     }
-                    headers.ForEach(x => mappers[x](row, item));
-                    result.Add(item);
                 }
-                catch (Exception e)
+                if (errors.Any())
                 {
-                    return await Result<IEnumerable<TEntity>>.FailAsync(_localizer[e.Message]);
+                    return await Result<IEnumerable<TEntity>>.FailAsync(errors);
                 }
-            }
+                var lastrow = ws.LastRowUsed();
+                var list = new List<TEntity>();
+                foreach (IXLRow row in ws.Rows(startRow, lastrow.RowNumber()))
+                {
+                    try
+                    {
+                        DataRow datarow = dt.Rows.Add();
+                        var item = (TEntity)Activator.CreateInstance(typeof(TEntity));
+                        foreach (IXLCell cell in row.Cells())
+                        {
+                            if (cell.DataType == XLDataType.DateTime)
+                            {
+                                datarow[cell.Address.ColumnNumber - 1] = cell.GetDateTime().ToString("yyyy-MM-dd HH:mm:ss");
+                            }
+                            else
+                            {
+                                datarow[cell.Address.ColumnNumber - 1] = cell.Value.ToString();
+                            }
+                        }
+                        headers.ForEach(x => mappers[x](datarow, item));
+                        list.Add(item);
+                    }
+                    catch (Exception e)
+                    {
+                        return await Result<IEnumerable<TEntity>>.FailAsync(string.Format(_localizer["Sheet name {0}:{1}"], sheetName, e.Message));
+                    }
+                }
 
-            return await Result<IEnumerable<TEntity>>.SuccessAsync(result, _localizer["Import Success"]);
+
+                return await Result<IEnumerable<TEntity>>.SuccessAsync(list);
+            }
         }
     }
+
 }
