@@ -1,0 +1,60 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditFinanceAccountModal> _localizer
+
+<EditForm Model="@AddEditFinanceAccountModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditFinanceAccountModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add FinanceAccount"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update FinanceAccount"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditFinanceAccountModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditFinanceAccountModel.Id)" @bind-Value="AddEditFinanceAccountModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                @* TODO: Insert Data Member Here *@
+                @*<MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditFinanceAccountModel.Name)" @bind-Value="AddEditFinanceAccountModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditFinanceAccountModel.Description)" @bind-Value="AddEditFinanceAccountModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudAutocomplete T="int" Label="@_localizer["Brand"]" For="@(() => AddEditFinanceAccountModel.BrandId)" @bind-Value="AddEditFinanceAccountModel.BrandId" ResetValueOnEmptyText="true" SearchFunc="@SearchBrands" Variant="Variant.Filled" ToStringFunc="@(i => _brands.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditFinanceAccountModel.Rate)" @bind-Value="AddEditFinanceAccountModel.Rate" Label="@_localizer["Rate"]" />
+                </MudItem>
+                *@
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditFinanceAccountModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

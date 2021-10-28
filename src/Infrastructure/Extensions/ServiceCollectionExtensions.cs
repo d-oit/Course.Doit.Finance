@@ -28,9 +28,11 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Extensions
                 .AddTransient(typeof(IRepositoryAsync<,>), typeof(RepositoryAsync<,>))
                 .AddTransient<IProductRepository, ProductRepository>()
                 .AddTransient<IBrandRepository, BrandRepository>()
+                .AddTransient<IFinanceAccountRepository, FinanceAccountRepository>()
                 .AddTransient<IDocumentRepository, DocumentRepository>()
                 .AddTransient<IDocumentTypeRepository, DocumentTypeRepository>()
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            
         }
 
         public static IServiceCollection AddExtendedAttributesUnitOfWork(this IServiceCollection services)

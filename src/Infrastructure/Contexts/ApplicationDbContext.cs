@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BlazorHero.CleanArchitecture.Domain.Entities.ExtendedAttributes;
 using BlazorHero.CleanArchitecture.Domain.Entities.Misc;
+using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
 
 namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
 {
@@ -28,6 +29,7 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
         public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<FinanceAccount> FinanceAccounts { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<DocumentExtendedAttribute> DocumentExtendedAttributes { get; set; }
