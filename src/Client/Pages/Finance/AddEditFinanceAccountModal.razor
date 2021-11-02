@@ -29,20 +29,29 @@
                         <MudTextField Disabled For="@(() => AddEditFinanceAccountModel.Id)" @bind-Value="AddEditFinanceAccountModel.Id" Label="@_localizer["Id"]" />
                     </MudItem>
                 }
-                @* TODO: Insert Data Member Here *@
-                @*<MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditFinanceAccountModel.Name)" @bind-Value="AddEditFinanceAccountModel.Name" Label="@_localizer["Name"]" />
+                
+                <MudItem xs="12" md="6">
+                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Name)" @bind-Value="AddEditFinanceAccountModel.Name" Label="@_localizer["Name"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditFinanceAccountModel.Description)" @bind-Value="AddEditFinanceAccountModel.Description" Label="@_localizer["Description"]" />
+                    <MudTextField MaxLength="50" For="@(() => AddEditFinanceAccountModel.Code)" @bind-Value="AddEditFinanceAccountModel.Code" Label="@_localizer["Code"]" />
+                </MudItem>
+                 <MudItem xs="12" md="6">
+                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Owner)" @bind-Value="AddEditFinanceAccountModel.Owner" Label="@_localizer["Owner"]" />
+                </MudItem>
+                  <MudItem xs="12" md="6">
+                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Type)" @bind-Value="AddEditFinanceAccountModel.Owner" Label="@_localizer["Type"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudAutocomplete T="int" Label="@_localizer["Brand"]" For="@(() => AddEditFinanceAccountModel.BrandId)" @bind-Value="AddEditFinanceAccountModel.BrandId" ResetValueOnEmptyText="true" SearchFunc="@SearchBrands" Variant="Variant.Filled" ToStringFunc="@(i => _brands.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
+                    <MudNumericField  For="@(() => AddEditFinanceAccountModel.InitAmount)" @bind-Value="AddEditFinanceAccountModel.InitAmount" Label="@_localizer["InitAmount"]" Format="N2"/>
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditFinanceAccountModel.Rate)" @bind-Value="AddEditFinanceAccountModel.Rate" Label="@_localizer["Rate"]" />
+                    <MudCheckBox   For="@(() => AddEditFinanceAccountModel.IsActive)" @bind-Value="AddEditFinanceAccountModel.IsActive" Label="@_localizer["Active"]" />
                 </MudItem>
-                *@
+                <MudItem xs="12" md="6">
+                    <MudDatePicker Disabled="(AddEditFinanceAccountModel.IsActive ? false : true)" For="@(() => AddEditFinanceAccountModel.InactiveDate)" @bind-Value="AddEditFinanceAccountModel.InactiveDate" Label="@_localizer["InactiveDate"]" />
+                </MudItem>
+
             </MudGrid>
         </DialogContent>
         <DialogActions>

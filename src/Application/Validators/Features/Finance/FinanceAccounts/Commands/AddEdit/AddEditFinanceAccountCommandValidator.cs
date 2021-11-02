@@ -10,8 +10,6 @@ namespace BlazorHero.CleanArchitecture.Application.Validators.Features.Finance.F
         {
             RuleFor(request => request.Name)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Name is required!"]);
-            RuleFor(request => request.Code)
-                .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Code is required!"]);
         }
     }
 }

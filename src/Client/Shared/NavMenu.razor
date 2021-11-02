@@ -1,5 +1,6 @@
 ﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 @using System.Security.Claims
+@using BlazorHero.CleanArchitecture.Client
 
 <UserCard />
 <MudNavMenu>
@@ -10,9 +11,9 @@
             @_localizer["Hangfire"]
         </MudNavLink>
     }
-    <MudNavLink Href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank" Icon="@Icons.Material.Outlined.ReadMore">
+ @*   <MudNavLink Href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank" Icon="@Icons.Material.Outlined.ReadMore">
         @_localizer["Quick Start Guide"]
-    </MudNavLink>
+    </MudNavLink>*@
     <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
         @_localizer["Swagger"]
     </MudNavLink>
@@ -70,7 +71,18 @@
             @_localizer["Chat"]
         </MudNavLink>
     }
-    @if (_canViewProducts || _canViewBrands)
+      @if (_canViewFinances)
+    {
+        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Finance Management"]</MudListSubheader>
+        
+            <MudNavLink Href="@PageNames.Finances.FinanceAccountList" Icon="@Icons.Material.Outlined.CallToAction">
+                @_localizer["FinanceAccounts"]
+            </MudNavLink>
+           @* <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
+                @_localizer["Investements"]
+            </MudNavLink>*@
+    }
+ @*   @if (_canViewProducts || _canViewBrands)
     {
         <MudListSubheader Class="mt-2 mb-n2">@_localizer["Catalog Management"]</MudListSubheader>
         @if (_canViewProducts)
@@ -85,7 +97,7 @@
                 @_localizer["Brands"]
             </MudNavLink>
         }
-    }
+    }*@
 </MudNavMenu>
 
 @code {
@@ -101,6 +113,7 @@
     private bool _canViewChat;
     private bool _canViewProducts;
     private bool _canViewBrands;
+    private bool _canViewFinances;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -115,5 +128,6 @@
         _canViewChat = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Communication.Chat)).Succeeded;
         _canViewProducts = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Products.View)).Succeeded;
         _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded;
+        _canViewFinances = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Finances.View)).Succeeded;
     }
 }

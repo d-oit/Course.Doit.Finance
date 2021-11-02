@@ -84,10 +84,17 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccou
                 var record = await _unitOfWork.Repository<FinanceAccount>().GetByIdAsync(command.Id);
                 if (record != null)
                 {
-
                     record.Name = command.Name ?? record.Name;
                     record.Code = command.Code ?? record.Code;
                     record.Type = command.Type ?? record.Type;
+                    record.InitAmount = command.InitAmount;
+                    record.IsBankAccount = command.IsBankAccount;
+                    record.IsInvestmentAccount = command.IsInvestmentAccount;
+                    record.IsActive = command.IsActive;
+                    record.CountryCode = command.CountryCode;
+                    record.Owner = command.Owner ?? record.Owner;
+                    record.SortOrder = command.SortOrder;
+                    record.InactiveDate = record.InactiveDate;
 
                     await _unitOfWork.Repository<FinanceAccount>().UpdateAsync(record);
                     await _unitOfWork.Commit(cancellationToken);

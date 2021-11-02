@@ -7,6 +7,17 @@ namespace BlazorHero.CleanArchitecture.Shared.Constants.Permission
 {
     public static class Permissions
     {
+        [DisplayName("Finances")]
+        [Description("Finances Permissions")]
+        public static class Finances
+        {
+            public const string View = "Permissions.Finances.View";
+            public const string Create = "Permissions.Finances.Create";
+            public const string Edit = "Permissions.Finances.Edit";
+            public const string Delete = "Permissions.Finances.Delete";
+            public const string Search = "Permissions.Finances.Search";
+        }
+
         [DisplayName("FinanceAccounts")]
         [Description("FinanceAccounts Permissions")]
         public static class FinanceAccounts
@@ -15,7 +26,7 @@ namespace BlazorHero.CleanArchitecture.Shared.Constants.Permission
             public const string Create = "Permissions.FinanceAccounts.Create";
             public const string Edit = "Permissions.FinanceAccounts.Edit";
             public const string Delete = "Permissions.FinanceAccounts.Delete";
-            public const string Search = "Permissions.Products.Search";
+            public const string Search = "Permissions.FinanceAccounts.Search";
         }
 
         [DisplayName("Products")]

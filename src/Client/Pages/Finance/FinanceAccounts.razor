@@ -1,4 +1,4 @@
-@page "/doit/financeaccounts"
+@attribute [Route(PageNames.Finances.FinanceAccountList)]
 @attribute [Authorize(Policy = Permissions.FinanceAccounts.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
 @using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetAllPaged;
@@ -37,30 +37,33 @@ else
         </ToolBarContent>
         <HeaderContent>
             <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
-             @* TODO: Insert Data Member Here *@
-            @*<MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Brand">@_localizer["Brand"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Description">@_localizer["Description"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Barcode">@_localizer["Barcode"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Rate">@_localizer["Rate"]</MudTableSortLabel></MudTh>*@
+           
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Code">@_localizer["Code"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Owner">@_localizer["Owner"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InitAmount">@_localizer["InitAmount"]</MudTableSortLabel></MudTh>
+             <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
+              <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InactiveDate">@_localizer["InactiveDate"]</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Id">@context.Id</MudTd>
-             @* TODO: Insert Data Member Here *@
-            @*<MudTd DataLabel="Name">
+            <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Brand">
-                <MudHighlighter Text="@context.Brand" HighlightedText="@_searchString" />
+            <MudTd DataLabel="Code">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Description">
-                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+              <MudTd DataLabel="Owner">
+                <MudHighlighter Text="@context.Owner" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Barcode">
-                <MudHighlighter Text="@context.Barcode" HighlightedText="@_searchString" />
+              <MudTd DataLabel="Type">
+                <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Rate">@context.Rate</MudTd>*@
+             <MudTd DataLabel="InitAmount">@context.InitAmount</MudTd>
+              <MudTd DataLabel="IsActive">@context.IsActive</MudTd>
+               <MudTd DataLabel="InactiveDate">@context.InactiveDate</MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditFinanceAccounts || _canDeleteFinanceAccounts)
                 {
