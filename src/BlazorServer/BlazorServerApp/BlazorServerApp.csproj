@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-BlazorServer-723F9F37-10AC-482F-9D02-2956B510E32B</UserSecretsId>
+    <UserSecretsId>aspnet-BlazorServerApp-D5D9BC05-C256-4CB1-9EFD-767AF48F1979</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Server\Server.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\..\Client\Client.csproj" />
   </ItemGroup>
 
 </Project>

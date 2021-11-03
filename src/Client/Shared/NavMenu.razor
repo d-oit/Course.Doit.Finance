@@ -5,18 +5,14 @@
 <UserCard />
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
-    @if (_canViewHangfire)
+    @if (_canViewFinances)
     {
-        <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
-            @_localizer["Hangfire"]
+        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Finance Management"]</MudListSubheader>
+        <MudNavLink Href="@PageNames.Finances.FinanceAccountList" Icon="@Icons.Material.Outlined.CallToAction">
+            @_localizer["FinanceAccounts"]
         </MudNavLink>
     }
- @*   <MudNavLink Href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank" Icon="@Icons.Material.Outlined.ReadMore">
-        @_localizer["Quick Start Guide"]
-    </MudNavLink>*@
-    <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
-        @_localizer["Swagger"]
-    </MudNavLink>
+ 
     <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal"]</MudListSubheader>
     @if (_canViewDashboards)
     {
@@ -63,6 +59,17 @@
         {
             <MudNavLink Href="/identity/roles" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
         }
+
+        @if (_canViewHangfire)
+        {
+            <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
+                @_localizer["Hangfire"]
+            </MudNavLink>
+        
+            <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
+                @_localizer["Swagger"]
+            </MudNavLink>
+        }
     }
     @if (_canViewChat)
     {
@@ -71,33 +78,7 @@
             @_localizer["Chat"]
         </MudNavLink>
     }
-      @if (_canViewFinances)
-    {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Finance Management"]</MudListSubheader>
-        
-            <MudNavLink Href="@PageNames.Finances.FinanceAccountList" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["FinanceAccounts"]
-            </MudNavLink>
-           @* <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Investements"]
-            </MudNavLink>*@
-    }
- @*   @if (_canViewProducts || _canViewBrands)
-    {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Catalog Management"]</MudListSubheader>
-        @if (_canViewProducts)
-        {
-            <MudNavLink Href="/catalog/products" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Products"]
-            </MudNavLink>
-        }
-        @if (_canViewBrands)
-        {
-            <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Brands"]
-            </MudNavLink>
-        }
-    }*@
+  
 </MudNavMenu>
 
 @code {

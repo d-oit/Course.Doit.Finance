@@ -38,13 +38,10 @@ else
         <HeaderContent>
             <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
            
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Code">@_localizer["Code"]</MudTableSortLabel></MudTh>
-                        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Owner">@_localizer["Owner"]</MudTableSortLabel></MudTh>
-                                    <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name" Enabled>@_localizer["Name"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InitAmount">@_localizer["InitAmount"]</MudTableSortLabel></MudTh>
-             <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
-              <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InactiveDate">@_localizer["InactiveDate"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -52,18 +49,11 @@ else
             <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Code">
-                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
-            </MudTd>
-              <MudTd DataLabel="Owner">
-                <MudHighlighter Text="@context.Owner" HighlightedText="@_searchString" />
-            </MudTd>
               <MudTd DataLabel="Type">
                 <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
             </MudTd>
-             <MudTd DataLabel="InitAmount">@context.InitAmount</MudTd>
+             <MudTd DataLabel="InitAmount"> @context.InitAmount.ToString("N2")</MudTd>
               <MudTd DataLabel="IsActive">@context.IsActive</MudTd>
-               <MudTd DataLabel="InactiveDate">@context.InactiveDate</MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditFinanceAccounts || _canDeleteFinanceAccounts)
                 {

@@ -23,6 +23,7 @@
         </TitleContent>
         <DialogContent>
             <MudGrid>
+            
                 @if (AddEditFinanceAccountModel.Id != 0)
                 {
                     <MudItem xs="12" md="6">
@@ -31,26 +32,34 @@
                 }
                 
                 <MudItem xs="12" md="6">
-                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Name)" @bind-Value="AddEditFinanceAccountModel.Name" Label="@_localizer["Name"]" />
+                    <MudTextField T="string" MaxLength="150" For="@(() => AddEditFinanceAccountModel.Name)" @bind-Value="AddEditFinanceAccountModel.Name" Label="@_localizer["Name"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudTextField MaxLength="50" For="@(() => AddEditFinanceAccountModel.Code)" @bind-Value="AddEditFinanceAccountModel.Code" Label="@_localizer["Code"]" />
+                    <MudTextField T="string" MaxLength="50" For="@(() => AddEditFinanceAccountModel.Code)" @bind-Value="AddEditFinanceAccountModel.Code" Label="@_localizer["Code"]" HelperText="@_localizer["Code filled from Name"]" />
                 </MudItem>
                  <MudItem xs="12" md="6">
-                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Owner)" @bind-Value="AddEditFinanceAccountModel.Owner" Label="@_localizer["Owner"]" />
+                    <MudTextField T="string" MaxLength="150" For="@(() => AddEditFinanceAccountModel.Owner)" @bind-Value="AddEditFinanceAccountModel.Owner" Label="@_localizer["Owner"]" />
                 </MudItem>
                   <MudItem xs="12" md="6">
-                    <MudTextField MaxLength="150" For="@(() => AddEditFinanceAccountModel.Type)" @bind-Value="AddEditFinanceAccountModel.Owner" Label="@_localizer["Type"]" />
+                    <MudTextField T="string" MaxLength="150" For="@(() => AddEditFinanceAccountModel.Type)" @bind-Value="AddEditFinanceAccountModel.Type" Label="@_localizer["Type"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudNumericField  For="@(() => AddEditFinanceAccountModel.InitAmount)" @bind-Value="AddEditFinanceAccountModel.InitAmount" Label="@_localizer["InitAmount"]" Format="N2"/>
+                    <MudNumericField  For="@(() => AddEditFinanceAccountModel.InitAmount)" @bind-Value="AddEditFinanceAccountModel.InitAmount" Step="100" Label="@_localizer["InitAmount"]" Format="N2"/>
+                </MudItem>
+
+                 <MudItem xs="12" md="6">
+                    <MudCheckBox   For="@(() => AddEditFinanceAccountModel.IsBankAccount)" @bind-Checked="AddEditFinanceAccountModel.IsBankAccount" Label="@_localizer["IsBankAccount"]" />
+                </MudItem>
+                   <MudItem xs="12" md="6">
+                    <MudCheckBox   For="@(() => AddEditFinanceAccountModel.IsInvestmentAccount)" @bind-Checked="AddEditFinanceAccountModel.IsInvestmentAccount" Label="@_localizer["IsInvestmentAccount"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudCheckBox   For="@(() => AddEditFinanceAccountModel.IsActive)" @bind-Value="AddEditFinanceAccountModel.IsActive" Label="@_localizer["Active"]" />
+                    <MudCheckBox   For="@(() => AddEditFinanceAccountModel.IsActive)" @bind-Checked="AddEditFinanceAccountModel.IsActive" Label="@_localizer["Active"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudDatePicker Disabled="(AddEditFinanceAccountModel.IsActive ? false : true)" For="@(() => AddEditFinanceAccountModel.InactiveDate)" @bind-Value="AddEditFinanceAccountModel.InactiveDate" Label="@_localizer["InactiveDate"]" />
+                    <MudDatePicker For="@(() => AddEditFinanceAccountModel.InactiveDate)" @bind-Date="AddEditFinanceAccountModel.InactiveDate" Label="@_localizer["InactiveDate"]" />
                 </MudItem>
+                
 
             </MudGrid>
         </DialogContent>

@@ -24,22 +24,21 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccou
         [StringLength(50)]
         public string Code { get; set; }
 
-        [Required]
         [StringLength(300)]
         public string Owner { get; set; }
 
-        [Required]
+  
         [StringLength(150)]
         public string Type { get; set; }
 
 
-        [Required, MinLength(2), MaxLength(2)]
+        [MinLength(2), MaxLength(2)]
         public string CountryCode { get; set; } = "DE";
 
         [Range(0, 100)]
         public int SortOrder { get; set; } = 99;
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [DataType(DataType.Date)]
         public DateTime? InactiveDate { get; set; }
