@@ -1,53 +1,24 @@
-<!DOCTYPE html>
-<html>
+﻿@using Microsoft.AspNetCore.Components.Web
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>d.o.it Finance</title>
-    <base href="/" />
-    <link href="css/font_montserrat.css" rel="stylesheet">
+     <link href="css/font_montserrat.css" rel="stylesheet">
     <link href="css/font_roboto.css" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css?v=5.2.0" rel="stylesheet" />
     <link href="css/loader.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <base href="~/" />
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
-
 <body>
-    <div id="app">
-        <style>
-            @keyframes slide {
-                0% {
-                    transform: translateX(-25%);
-                }
-
-                100% {
-                    transform: translateX(25%);
-                }
-            }
-
-            .mud-wasm {
-                animation: slide 3s ease-in-out infinite alternate;
-                background-image: linear-gradient(-60deg,#1E88E5 50%,#0069c0 50%);
-                bottom: 0;
-                left: -50%;
-                opacity: .5;
-                position: fixed;
-                right: -50%;
-                top: 0;
-                z-index: -1
-            }
-
-            .mud-wasm-cont {
-                left: 50%;
-                padding: 10vmin;
-                position: fixed;
-                text-align: center;
-                top: 50%;
-                transform: translate(-50%,-50%)
-            }
-        </style>
-
+    @RenderBody()
+      <div id="app">
+   
         <div style="height:100%;width:100%;margin:0;position:fixed;">
             <div class="mud-wasm"></div>
             <div class="mud-wasm" style="animation-direction:alternate-reverse;animation-duration:4s;"></div>
@@ -68,7 +39,8 @@
     <script src="js/scroll.js"></script>
     <script src="js/sounds.js"></script>
     <script src="js/file.js"></script>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.server.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js?v=5.2.0"></script>
 </body>
 </html>
+

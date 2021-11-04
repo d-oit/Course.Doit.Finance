@@ -1,5 +1,4 @@
-using BlazorServerApp.Areas.Identity;
-
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
@@ -8,11 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var hostingEnvironment = builder.Environment;
 // Add services to the container.
 
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+builder.Services.AddServerSideBlazor()
+      .AddCircuitOptions(opt =>
+      {
+          opt.DetailedErrors = hostingEnvironment.IsDevelopment();
+      });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(sp.GetRequiredService<NavigationManager>().BaseUri) });
 
 var app = builder.Build();
 
