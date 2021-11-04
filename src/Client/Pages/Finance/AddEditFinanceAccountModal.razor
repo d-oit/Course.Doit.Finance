@@ -10,14 +10,14 @@
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-                        @_localizer["Add FinanceAccount"]
+                        @_localizer["Add"]
                     </MudText>
                 }
                 else
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
-                        @_localizer["Update FinanceAccount"]
+                         @_localizer["Update Finance Account"] 
                     </MudText>
                 }
             }
@@ -57,7 +57,7 @@
                     <MudCheckBox For="@(() => AddEditFinanceAccountModel.IsInvestmentAccount)" @bind-Checked="AddEditFinanceAccountModel.IsInvestmentAccount" Label="@_localizer["IsInvestmentAccount"]" />
                 </MudItem>
                  <MudItem xs="6" md="6">
-                        <MudCheckBox For="@(() => AddEditFinanceAccountModel.IsActive)" @bind-Checked="AddEditFinanceAccountModel.IsActive" Label="@_localizer["Active"]" />
+                        <MudCheckBox For="@(() => AddEditFinanceAccountModel.IsActive)" @bind-Checked="AddEditFinanceAccountModel.IsActive" Label="@_localizer["IsActive"]" />
                     </MudItem>
                 <MudItem xs="6" md="6">
                     <MudItem>
