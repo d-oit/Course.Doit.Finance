@@ -183,4 +183,7 @@
   <data name="Reload" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="Dense" xml:space="preserve">
+    <value>Kompakt</value>
+  </data>
 </root>

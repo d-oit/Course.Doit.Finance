@@ -1,7 +1,6 @@
 @attribute [Route(PageNames.Finances.FinanceAccountList)]
 @attribute [Authorize(Policy = Permissions.FinanceAccounts.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
-@inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
 @using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetAllPaged;
 
 <style>
@@ -22,18 +21,18 @@ else
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateFinanceAccounts)
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                 }
                 else
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                 }
             </div>
             <MudSpacer />
             @if (_canSearchFinanceAccounts)
             {
-                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Clearable="true"></MudTextField>
             }
         </ToolBarContent>
         <HeaderContent>
@@ -50,11 +49,11 @@ else
             <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>
-              <MudTd DataLabel="Type">
+            <MudTd DataLabel="Type">
                 <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
             </MudTd>
-             <MudTd DataLabel="InitAmount"> @context.InitAmount.ToString("N2")</MudTd>
-              <MudTd DataLabel="IsActive">@context.IsActive</MudTd>
+            <MudTd DataLabel="InitAmount"> @context.InitAmount.ToString("N2")</MudTd>
+            <MudTd DataLabel="IsActive"> <MudSwitch @bind-Checked="@context.IsActive" Disabled></MudSwitch></MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditFinanceAccounts || _canDeleteFinanceAccounts)
                 {
