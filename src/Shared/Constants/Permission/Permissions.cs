@@ -7,6 +7,28 @@ namespace BlazorHero.CleanArchitecture.Shared.Constants.Permission
 {
     public static class Permissions
     {
+        [DisplayName("Transactions")]
+        [Description("Transactions Permissions")]
+        public static class Transactions
+        {
+            public const string View = $"Permissions.{nameof(Transactions)}.View";
+            public const string Create = $"Permissions.{nameof(Transactions)}.Create";
+            public const string Edit = $"Permissions.{nameof(Transactions)}.Edit";
+            public const string Delete = $"Permissions.{nameof(Transactions)}.Delete";
+            public const string Search = $"Permissions.{nameof(Transactions)}.Search";
+        }
+
+        [DisplayName("Investments")]
+        [Description("Investments Permissions")]
+        public static class Investments
+        {
+            public const string View = $"Permissions.{nameof(Investments)}.View";
+            public const string Create = $"Permissions.{nameof(Investments)}.Create";
+            public const string Edit = $"Permissions.{nameof(Investments)}.Edit";
+            public const string Delete = $"Permissions.{nameof(Investments)}.Delete";
+            public const string Search = $"Permissions.{nameof(Investments)}.Search";
+        }
+
         [DisplayName("Finances")]
         [Description("Finances Permissions")]
         public static class Finances

@@ -11,7 +11,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         private string _code;
         private string _name;
         private bool isBankAccount;
-    
+
 
         [Required]
         [StringLength(300)]

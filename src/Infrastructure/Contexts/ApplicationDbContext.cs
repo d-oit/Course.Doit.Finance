@@ -1,16 +1,16 @@
 ﻿using BlazorHero.CleanArchitecture.Application.Interfaces.Services;
 using BlazorHero.CleanArchitecture.Application.Models.Chat;
-using BlazorHero.CleanArchitecture.Infrastructure.Models.Identity;
 using BlazorHero.CleanArchitecture.Domain.Contracts;
 using BlazorHero.CleanArchitecture.Domain.Entities.Catalog;
+using BlazorHero.CleanArchitecture.Domain.Entities.ExtendedAttributes;
+using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
+using BlazorHero.CleanArchitecture.Domain.Entities.Misc;
+using BlazorHero.CleanArchitecture.Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Domain.Entities.ExtendedAttributes;
-using BlazorHero.CleanArchitecture.Domain.Entities.Misc;
-using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
 
 namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
 {
@@ -33,6 +33,10 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<DocumentExtendedAttribute> DocumentExtendedAttributes { get; set; }
+
+        public DbSet<Investment> Investment { get; set; }
+
+        public DbSet<Transaction> Transactions { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
@@ -69,14 +73,14 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
             {
                 property.SetColumnType("decimal(18,2)");
             }
-            
+
             foreach (var property in builder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.Name is "LastModifiedBy" or "CreatedBy"))
             {
                 property.SetColumnType("nvarchar(128)");
             }
-            
+
             base.OnModelCreating(builder);
             builder.Entity<ChatHistory<BlazorHeroUser>>(entity =>
             {

@@ -51,6 +51,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestInfrastructureProject",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerApp", "src\BlazorServer\BlazorServerApp\BlazorServerApp.csproj", "{9791D993-105C-459F-ADDE-D91A1A73F311}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C2E2D126-DF83-4E50-970D-D338CF25D483}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrudHelper", "CrudHelper", "{5E6E74F0-C672-4BB2-BEE6-EDB0B6D5A012}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorHeroHelper", "Tools\CrudHelper\BlazorHeroHelper\BlazorHeroHelper.csproj", "{FCE5BE2E-0095-421A-B3B2-91EA49E5C01F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +106,8 @@ Global
 		{9791D993-105C-459F-ADDE-D91A1A73F311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9791D993-105C-459F-ADDE-D91A1A73F311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9791D993-105C-459F-ADDE-D91A1A73F311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCE5BE2E-0095-421A-B3B2-91EA49E5C01F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCE5BE2E-0095-421A-B3B2-91EA49E5C01F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,9 +129,11 @@ Global
 		{BFAD2E2A-8C7C-4357-9C81-D2ECDEEFC0F1} = {39A93E2F-51DE-47C0-93AF-A24561630C18}
 		{C9CF194B-576E-469E-8E4A-FACE0AA863C1} = {1D491AAE-7A45-4B6B-9E3B-F8F3F0EFDED5}
 		{9791D993-105C-459F-ADDE-D91A1A73F311} = {885BB018-5B07-4038-B061-71B70188933B}
+		{5E6E74F0-C672-4BB2-BEE6-EDB0B6D5A012} = {C2E2D126-DF83-4E50-970D-D338CF25D483}
+		{FCE5BE2E-0095-421A-B3B2-91EA49E5C01F} = {5E6E74F0-C672-4BB2-BEE6-EDB0B6D5A012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {ED3E6669-AEC5-4A3B-9E57-2A81DE87BAAF}
 		RESX_CodeReferences = {"Items":[{"Expression":"\\W($File.$Key)\\W","Extensions":".cs,.xaml,.cshtml","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\W($File.$Key)\\W","Extensions":".vbhtml","IsCaseSensitive":false,"SingleLineComment":null},{"Expression":"ResourceManager.GetString\\(\"($Key)\"\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"typeof\\((\\w+\\.)*($File)\\).+\"($Key)\"|\"($Key)\".+typeof\\((\\w+\\.)*($File)\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\W($Key)\\W","Extensions":".vb","IsCaseSensitive":false,"SingleLineComment":"'"},{"Expression":"\\W($File::$Key)\\W","Extensions":".cpp,.c,.hxx,.h","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"&lt;%\\$\\s+Resources:\\s*($File)\\s*,\\s*($Key)\\s*%&gt;","Extensions":".aspx,.ascx,.master","IsCaseSensitive":true,"SingleLineComment":null},{"Expression":"StringResourceKey\\.($Key)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\.($Key)","Extensions":".ts,.html","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"@_localizer\\[\"($Key)\"\\]","Extensions":".razor","IsCaseSensitive":false,"SingleLineComment":null}]}
+		SolutionGuid = {ED3E6669-AEC5-4A3B-9E57-2A81DE87BAAF}
 	EndGlobalSection
 EndGlobal
