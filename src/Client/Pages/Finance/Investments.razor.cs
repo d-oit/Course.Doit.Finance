@@ -1,6 +1,8 @@
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Queries.GetAllPaged;
+using BlazorHero.CleanArchitecture.Application.Requests;
 using BlazorHero.CleanArchitecture.Application.Requests.Finance;
 using BlazorHero.CleanArchitecture.Client.Extensions;
+using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.FinanceAccount;
 using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Investment;
 using BlazorHero.CleanArchitecture.Shared.Constants.Application;
 using BlazorHero.CleanArchitecture.Shared.Constants.Permission;
@@ -8,7 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -17,6 +21,8 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
     public partial class Investments
     {
         [Inject] private IInvestmentManager InvestmentManager { get; set; }
+
+        [Inject] private IFinanceAccountManager FinanceAccountManager { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -35,6 +41,9 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
         private bool _canDeleteInvestments;
         private bool _canSearchInvestments;
         private bool _loaded;
+        private bool FilterByFinanceAccount { get; set; }
+
+        private NameValueResponse FilterFinanceAccount { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -52,6 +61,22 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             }
         }
 
+        private async Task<IEnumerable<NameValueResponse>> SearchFinanceAccount(string value)
+        {
+            var names = await FinanceAccountManager.GetFinanceAccountNamesAsync();
+
+            FilterByFinanceAccount = false;
+            if (FilterFinanceAccount != null && FilterFinanceAccount.Id > 0)
+            {
+                FilterByFinanceAccount = true;
+            }
+            // if text is null or empty, show complete list
+            if (string.IsNullOrEmpty(value))
+                return names;
+
+            return names.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        }
+
         private async Task<TableData<GetAllPagedInvestmentsResponse>> ServerReload(TableState state)
         {
             if (!string.IsNullOrWhiteSpace(_searchString))
@@ -64,7 +89,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
 
         private async Task LoadData(int pageNumber, int pageSize, TableState state)
         {
-            string[] orderings = null;
+            string[] orderings = new[] { "Name" };
             if (!string.IsNullOrEmpty(state.SortLabel))
             {
                 orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };

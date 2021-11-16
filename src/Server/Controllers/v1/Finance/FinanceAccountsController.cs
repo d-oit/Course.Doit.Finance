@@ -1,16 +1,30 @@
-using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetById;
+using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Commands.Delete;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetAllPaged;
+using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetById;
+using BlazorHero.CleanArchitecture.Application.Interfaces.Services;
 using BlazorHero.CleanArchitecture.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Commands.AddEdit;
 
 namespace BlazorHero.CleanArchitecture.Server.Controllers.v1.Finance
 {
     public class FinanceAccountsController : BaseApiController<FinanceAccountsController>
     {
+        private readonly IFinanceAccountValueNameService _financeAccountValueNameService;
+
+        public FinanceAccountsController()
+        {
+        }
+
+        public FinanceAccountsController(IFinanceAccountValueNameService financeAccountValueNameService)
+        {
+            this._financeAccountValueNameService = financeAccountValueNameService;
+        }
+
+
+
         /// <summary>
         /// Get All FinanceAccounts
         /// </summary>
@@ -25,6 +39,14 @@ namespace BlazorHero.CleanArchitecture.Server.Controllers.v1.Finance
         {
             var records = await _mediator.Send(new GetAllFinanceAccountsQuery(pageNumber, pageSize, searchString, orderBy));
             return Ok(records);
+        }
+
+        [Authorize(Policy = Permissions.FinanceAccounts.View)]
+        [HttpGet]
+        public async Task<IActionResult> GetAllNames()
+        {
+            var list = await _financeAccountValueNameService.GetAllAsync();
+            return Ok(list);
         }
 
         /// <summary>

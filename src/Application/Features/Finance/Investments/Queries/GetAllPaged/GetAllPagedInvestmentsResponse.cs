@@ -51,8 +51,8 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.
         [StringLength(_typeLength)]
         public string Type { get; set; } = "Finanzierung"; // Bestand, Aktien, Crowdfunding...
 
-        [DataType(DataType.Date)]
-        public DateTime InterestClaimSinceDate { get; set; }
+
+        public DateTime InterestClaimSinceDate { get; set; } = DateTime.UtcNow.Date;
 
 
 

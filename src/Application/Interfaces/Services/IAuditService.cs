@@ -11,4 +11,5 @@ namespace BlazorHero.CleanArchitecture.Application.Interfaces.Services
 
         Task<IResult<string>> ExportToExcelAsync(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false);
     }
+
 }

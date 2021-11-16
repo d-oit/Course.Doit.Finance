@@ -20,74 +20,74 @@ else
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateFinanceAccounts)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+            }
+        </div>
+        <MudSpacer />
+        @if (_canSearchFinanceAccounts)
+        {
+            <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Clearable="true"></MudTextField>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
+
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name" Enabled>@_localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InitAmount">@_localizer["InitAmount"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
+        <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="Type">
+            <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="InitAmount"> @context.InitAmount.ToString("N2")</MudTd>
+        <MudTd DataLabel="IsActive"> <MudSwitch @bind-Checked="@context.IsActive" Disabled></MudSwitch></MudTd>
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            @if (_canEditFinanceAccounts || _canDeleteFinanceAccounts)
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                    @if (_canEditFinanceAccounts)
+                        {
+                        <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
+                        }
+                    @if (_canDeleteFinanceAccounts)
+                        {
+                        <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
+                        }
+                </MudMenu>
                 }
                 else
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Info" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                    @_localizer["No Allowed Actions"]
+                </MudButton>
                 }
-            </div>
-            <MudSpacer />
-            @if (_canSearchFinanceAccounts)
-            {
-                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Clearable="true"></MudTextField>
-            }
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
-           
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name" Enabled>@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InitAmount">@_localizer["InitAmount"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
-            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
-            <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Type">
-                <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="InitAmount"> @context.InitAmount.ToString("N2")</MudTd>
-            <MudTd DataLabel="IsActive"> <MudSwitch @bind-Checked="@context.IsActive" Disabled></MudSwitch></MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditFinanceAccounts || _canDeleteFinanceAccounts)
-                {
-                    <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canEditFinanceAccounts)
-                            {
-                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
-                            }
-                        @if (_canDeleteFinanceAccounts)
-                            {
-                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
-                            }
-                    </MudMenu>
-                    }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        @_localizer["No Allowed Actions"]
-                    </MudButton>
-                }
-            </MudTd>
-        </RowTemplate>
-        <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
-        </FooterContent>
-        <PagerContent>
-            <TablePager />
-        </PagerContent>
-    </MudTable>
+        </MudTd>
+    </RowTemplate>
+    <FooterContent>
+        <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
+        <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
+        <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
+    </FooterContent>
+    <PagerContent>
+        <TablePager />
+    </PagerContent>
+</MudTable>
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlazorHeroHelper.Templates
+﻿namespace BlazorHeroHelper.Templates
 {
     public class AddEditCommand
     {
@@ -62,15 +56,7 @@ namespace $_NAMESPACE_$
                     .GetByIdAsync(command.Id);
                 if (record != null)
                 {
-
-                    //TODO: Modify And Edit Record Here
-                    /* 
-
-                    record.IsShow = command.IsShow;
-                    record.MinimumLimit = command.MinimumLimit;
-                    record.MaximumLimit = command.MaximumLimit;
-
-                    */
+                    var record = _mapper.Map<$_ENTITY_$>(command);
 
                     await _unitOfWork.Repository<$_ENTITY_$>().UpdateAsync(record);
                     await _unitOfWork.Commit(cancellationToken);
