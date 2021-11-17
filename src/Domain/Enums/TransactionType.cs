@@ -4,6 +4,6 @@
     {
         Income = 0,
         Expense = 1,
-        Savings = 2,
+        Investment = 2,
     }
 }
