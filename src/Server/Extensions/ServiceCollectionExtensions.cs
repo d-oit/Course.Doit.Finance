@@ -64,7 +64,7 @@ namespace BlazorHero.CleanArchitecture.Server.Extensions
         internal static IServiceCollection AddForwarding(this IServiceCollection services, IConfiguration configuration)
         {
             var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
-            var config = applicationSettingsConfiguration.Get<AppConfiguration>(); 
+            var config = applicationSettingsConfiguration.Get<AppConfiguration>();
             if (config.BehindSSLProxy)
             {
                 services.Configure<ForwardedHeadersOptions>(options =>
@@ -93,7 +93,7 @@ namespace BlazorHero.CleanArchitecture.Server.Extensions
                         });
                 });
             }
-            
+
             return services;
         }
 
@@ -156,7 +156,7 @@ namespace BlazorHero.CleanArchitecture.Server.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "BlazorHero.CleanArchitecture",
+                    Title = "Doit.Finance",
                     License = new OpenApiLicense
                     {
                         Name = "MIT License",

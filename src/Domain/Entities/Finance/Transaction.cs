@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
 {
+
     public class Transaction : AuditableEntity<long>
     {
         private decimal amount;
@@ -42,14 +43,14 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         [StringLength(100)]
         public string DocumentNo { get; set; } = "";
 
+        [StringLength(200)]
+        public string CategoryName { get; set; } = "";
+
         [StringLength(700)]
         public string Description { get; set; } // TODO Buchungstext -> Rules for Category and Co !
 
-        public Guid? CategoryId { get; set; }
-
-
         [Required]
-        public Guid FinanceAccountId { get; set; }
+        public int FinanceAccountId { get; set; }
 
         [ForeignKey(nameof(FinanceAccountId))]
         public FinanceAccount FinanceAccount { get; set; }
@@ -67,7 +68,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         {
             get => amount; set
             {
-                if ((TransactionType == TransactionType.Expense || TransactionType == TransactionType.Savings))
+                if ((TransactionType == TransactionType.Expense))
                 {
                     amount = -value;
                 }
@@ -103,11 +104,11 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         }
 
         [NotMapped]
-        public decimal SaveUpAmount
+        public decimal InvestmentAmount
         {
             get
             {
-                if (TransactionType == TransactionType.Savings)
+                if (TransactionType == TransactionType.Investment)
                     return Amount;
 
                 return 0;
@@ -131,12 +132,12 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         public BookingType BookingType { get; set; }
 
 
-        public Guid? CounterAccountId { get; set; }
+        public int? CounterAccountId { get; set; }
 
         [ForeignKey(nameof(CounterAccountId))]
         public FinanceAccount CounterAccount { get; set; }
 
-        public Guid? InvestmentId { get; set; }
+        public long? InvestmentId { get; set; }
 
         [ForeignKey(nameof(InvestmentId))]
         public Investment Investment { get; set; }

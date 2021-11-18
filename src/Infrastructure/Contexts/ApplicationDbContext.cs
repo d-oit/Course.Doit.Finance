@@ -67,6 +67,8 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+
             foreach (var property in builder.Model.GetEntityTypes()
             .SelectMany(t => t.GetProperties())
             .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
@@ -135,6 +137,19 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
             {
                 entity.ToTable("UserTokens", "Identity");
             });
+
+
+            builder.Entity<FinanceAccount>(entity =>
+            {
+                entity.HasIndex(x => x.Name).IsUnique();
+            });
+
+            builder.Entity<Investment>(entity =>
+            {
+                entity.HasIndex(x => new { x.No, x.FinanceAccountId }).IsUnique();
+            });
         }
+
+
     }
 }

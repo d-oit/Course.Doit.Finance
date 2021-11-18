@@ -5,6 +5,7 @@ using BlazorHero.CleanArchitecture.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,6 +40,10 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.
             if (command.Id == 0)
             {
                 var record = _mapper.Map<Investment>(command);
+                if (string.IsNullOrWhiteSpace(record.No))
+                {
+                    record.No = Guid.NewGuid().ToString();
+                }
                 await _unitOfWork.Repository<Investment>().AddAsync(record);
                 await _unitOfWork.Commit(cancellationToken);
                 return await Result<long>.SuccessAsync(record.Id, "Create Record Successfully");

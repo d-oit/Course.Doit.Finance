@@ -55,7 +55,7 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
                 DateTime = e.DateTime,
                 PostingDate = e.PostingDate,
                 DocumentNo = e.DocumentNo,
-                CategoryId = e.CategoryId,
+                CategoryName = e.CategoryName,
                 FinanceAccountId = e.FinanceAccountId,
                 FinanceAccountName = e.FinanceAccount.Name,
                 Receiver = e.Receiver,

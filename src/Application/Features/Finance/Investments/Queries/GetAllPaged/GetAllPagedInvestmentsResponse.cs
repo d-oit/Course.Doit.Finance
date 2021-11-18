@@ -34,7 +34,7 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.
         public string Code { get => _code; set => _code = StringExt.Truncate(value?.ToUpperInvariant(), _codeLength); }
 
         [Required]
-        public Guid FinanceAccountId { get; set; }
+        public long FinanceAccountId { get; set; }
 
         public string FinanceAccountName { get; set; }
 

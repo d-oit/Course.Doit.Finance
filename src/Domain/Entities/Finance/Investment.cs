@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
 {
+
     public class Investment : AuditableEntity<long>
     {
         private string _code = "";
@@ -34,7 +35,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         public string Code { get => _code; set => _code = StringExt.Truncate(value?.ToUpperInvariant(), _codeLength); }
 
         [Required]
-        public Guid FinanceAccountId { get; set; }
+        public int FinanceAccountId { get; set; }
 
         [ForeignKey(nameof(FinanceAccountId))]
         public FinanceAccount FinanceAccount { get; set; }

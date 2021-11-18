@@ -7,7 +7,6 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
     public class GetAllPagedTransactionsResponse
     {
         public long Id { get; set; }
-        private decimal amount;
 
         public string Name
         {
@@ -20,13 +19,11 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
 
         public DateTime PostingDate { get; set; }
 
-        public string DocumentNo { get; set; } = "";
-
-        public Guid? CategoryId { get; set; }
+        public string DocumentNo { get; set; }
 
         public string CategoryName { get; set; }
 
-        public Guid FinanceAccountId { get; set; }
+        public long FinanceAccountId { get; set; }
 
         public string FinanceAccountName { get; set; }
 
@@ -35,25 +32,15 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
 
         public decimal Amount
         {
-            get => amount; set
-            {
-                if ((TransactionType == TransactionType.Expense || TransactionType == TransactionType.Savings))
-                {
-                    amount = -value;
-                }
-                else
-                {
-                    amount = value;
-                }
-            }
+            get; set;
         }
 
 
         public bool Favorit { get; set; }
 
-        public bool IsCash { get; set; } = false;
+        public bool IsCash { get; set; }
 
-        public string Color { get; set; } = "#FFFFFF";
+        public string Color { get; set; }
 
         public string UsedFormula { get; set; }
 
@@ -61,11 +48,11 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
 
         public BookingType BookingType { get; set; }
 
-        public Guid? CounterAccountId { get; set; }
+        public long? CounterAccountId { get; set; }
 
         public string CounterAccountName { get; set; }
 
-        public Guid? InvestmentId { get; set; }
+        public long? InvestmentId { get; set; }
 
         public string InvestmentName { get; set; }
 
@@ -80,7 +67,7 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
                 DateTime = e.DateTime,
                 PostingDate = e.PostingDate,
                 DocumentNo = e.DocumentNo,
-                CategoryId = e.CategoryId,
+                CategoryName = e.CategoryName,
                 FinanceAccountId = e.FinanceAccountId,
                 FinanceAccountName = e.FinanceAccount.Name,
                 Receiver = e.Receiver,
