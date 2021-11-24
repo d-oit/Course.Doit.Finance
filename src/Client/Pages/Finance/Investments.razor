@@ -1,5 +1,5 @@
-@page "/finance/investments"
-@attribute [Authorize(Policy = Permissions.Investments.View)]
+@attribute [Route(PageNames.Finances.InvestmentList)]
+@attribute [Authorize(Policy = Permissions.FinanceAccounts.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
 @using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Queries.GetAllPaged
 @using BlazorHero.CleanArchitecture.Application.Requests

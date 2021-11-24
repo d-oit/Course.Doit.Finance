@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using BlazorHero.CleanArchitecture.Shared.Constants.Localization;
+﻿using BlazorHero.CleanArchitecture.Shared.Constants.Localization;
 using BlazorHero.CleanArchitecture.Shared.Settings;
+using System.Linq;
 
 namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Settings
 {
@@ -10,6 +10,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Settings
         public bool IsRTL { get; set; }
         public bool IsDrawerOpen { get; set; }
         public string PrimaryColor { get; set; }
-        public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US";
+        public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de";
     }
 }

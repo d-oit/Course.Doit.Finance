@@ -30,6 +30,8 @@
             public const string GetAllBrandsCacheKey = "all-brands";
             public const string GetAllDocumentTypesCacheKey = "all-document-types";
 
+            public const string FinanceAccountValueNamesCacheKey = "FinanceAccountValueNames";
+
             public static string GetAllEntityExtendedAttributesCacheKey(string entityFullName)
             {
                 return $"all-{entityFullName}-extended-attributes";

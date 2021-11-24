@@ -55,12 +55,25 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Contexts
                         break;
                 }
             }
+
+
+
             if (_currentUserService.UserId == null)
             {
                 return await base.SaveChangesAsync(cancellationToken);
             }
             else
             {
+                if (ChangeTracker.Entries<FinanceAccount>().Any())
+                {
+                    foreach (var entry in ChangeTracker.Entries<FinanceAccount>().ToList())
+                    {
+                        if (string.IsNullOrWhiteSpace(entry.Entity.Owner))
+                        {
+                            entry.Entity.Owner = _currentUserService.UserName;
+                        }
+                    }
+                }
                 return await base.SaveChangesAsync(_currentUserService.UserId, cancellationToken);
             }
         }

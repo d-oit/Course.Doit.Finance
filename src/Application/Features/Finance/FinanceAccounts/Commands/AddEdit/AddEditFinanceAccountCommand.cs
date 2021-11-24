@@ -1,6 +1,7 @@
 using AutoMapper;
 using BlazorHero.CleanArchitecture.Application.Interfaces.Repositories;
 using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
+using BlazorHero.CleanArchitecture.Shared.Constants.Application;
 using BlazorHero.CleanArchitecture.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -25,11 +26,11 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccou
         public string Code { get; set; }
 
         [StringLength(300)]
-        public string Owner { get; set; }
+        public string Owner { get; set; } = "";
 
-  
+
         [StringLength(150)]
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
 
 
         [MinLength(2), MaxLength(2)]
@@ -66,24 +67,29 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccou
 
         public async Task<Result<int>> Handle(AddEditFinanceAccountCommand command, CancellationToken cancellationToken)
         {
-            if (await _unitOfWork.Repository<FinanceAccount>().Entities.Where(s => s.Id != command.Id).AnyAsync(cancellationToken: cancellationToken))
+            if (await _unitOfWork.Repository<FinanceAccount>().Entities.Where(s => s.Name == command.Name).AnyAsync(cancellationToken: cancellationToken))
             {
-                return await Result<int>.FailAsync("Record is already existed");
+                return await Result<int>.FailAsync(_localizer["Record is already existed"]);
             }
 
             if (command.Id == 0)
             {
+                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.FinanceAccountValueNamesCacheKey);
                 var record = _mapper.Map<FinanceAccount>(command);
                 await _unitOfWork.Repository<FinanceAccount>().AddAsync(record);
                 await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(record.Id, "Create Record Successfully");
+                return await Result<int>.SuccessAsync(record.Id, _localizer["Create Record Successfully"]);
             }
             else
             {
                 var record = await _unitOfWork.Repository<FinanceAccount>().GetByIdAsync(command.Id);
                 if (record != null)
                 {
-                    record.Name = command.Name ?? record.Name;
+                    if (command.Name != record.Name)
+                    {
+                        await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.FinanceAccountValueNamesCacheKey);
+                        record.Name = command.Name;
+                    }
                     record.Code = command.Code ?? record.Code;
                     record.Type = command.Type ?? record.Type;
                     record.InitAmount = command.InitAmount;
@@ -97,11 +103,11 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccou
 
                     await _unitOfWork.Repository<FinanceAccount>().UpdateAsync(record);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(record.Id, "Update Record Successfully");
+                    return await Result<int>.SuccessAsync(record.Id, _localizer["Update Record Successfully"]);
                 }
                 else
                 {
-                    return await Result<int>.FailAsync("Record Not Found");
+                    return await Result<int>.FailAsync(_localizer["Record Not Found"]);
                 }
             }
         }

@@ -12,9 +12,11 @@ namespace BlazorHero.CleanArchitecture.Server.Services
         {
             UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
             Claims = httpContextAccessor.HttpContext?.User?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
+            UserName = httpContextAccessor.HttpContext?.User?.Identity.Name;
         }
 
         public string UserId { get; }
+        public string UserName { get; }
         public List<KeyValuePair<string, string>> Claims { get; set; }
     }
 }

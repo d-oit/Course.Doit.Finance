@@ -13,6 +13,7 @@ using BlazorHero.CleanArchitecture.Infrastructure;
 using BlazorHero.CleanArchitecture.Infrastructure.Contexts;
 using BlazorHero.CleanArchitecture.Infrastructure.Models.Identity;
 using BlazorHero.CleanArchitecture.Infrastructure.Services;
+using BlazorHero.CleanArchitecture.Infrastructure.Services.Finance;
 using BlazorHero.CleanArchitecture.Infrastructure.Services.Identity;
 using BlazorHero.CleanArchitecture.Infrastructure.Shared.Services;
 using BlazorHero.CleanArchitecture.Server.Localization;
@@ -261,6 +262,7 @@ namespace BlazorHero.CleanArchitecture.Server.Extensions
             services.AddTransient<IUploadService, UploadService>();
             services.AddTransient<IAuditService, AuditService>();
             services.AddScoped<IExcelService, ExcelService>();
+            services.AddScoped<IFinanceAccountValueNameService, FinanceAccountValueNameService>();
             return services;
         }
 

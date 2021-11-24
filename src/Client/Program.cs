@@ -1,12 +1,12 @@
 using BlazorHero.CleanArchitecture.Client.Extensions;
 using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Preferences;
+using BlazorHero.CleanArchitecture.Client.Infrastructure.Settings;
+using BlazorHero.CleanArchitecture.Shared.Constants.Localization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Client.Infrastructure.Settings;
-using BlazorHero.CleanArchitecture.Shared.Constants.Localization;
 
 namespace BlazorHero.CleanArchitecture.Client
 {
@@ -18,19 +18,19 @@ namespace BlazorHero.CleanArchitecture.Client
                           .CreateDefault(args)
                           .AddRootComponents()
                           .AddClientServices();
+
             var host = builder.Build();
             var storageService = host.Services.GetRequiredService<ClientPreferenceManager>();
+            CultureInfo culture = culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de-DE");
             if (storageService != null)
             {
-                CultureInfo culture;
                 var preference = await storageService.GetPreference() as ClientPreference;
                 if (preference != null)
                     culture = new CultureInfo(preference.LanguageCode);
-                else
-                    culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de-DE");
-                CultureInfo.DefaultThreadCurrentCulture = culture;
-                CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             }
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
             await builder.Build().RunAsync();
         }
     }

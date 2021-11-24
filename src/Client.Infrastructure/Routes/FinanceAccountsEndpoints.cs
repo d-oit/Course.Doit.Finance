@@ -25,7 +25,7 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Routes
 
         public static string GetFinanceAccountNames()
         {
-            return $"api/v1/financeaccountnames/";
+            return $"api/v1/financeaccounts/names";
         }
 
         public static string GetCount = "api/v1/financeaccounts/count";

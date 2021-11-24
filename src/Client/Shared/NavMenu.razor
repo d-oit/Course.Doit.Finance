@@ -11,8 +11,14 @@
         <MudNavLink Href="@PageNames.Finances.FinanceAccountList" Icon="@Icons.Material.Outlined.CallToAction">
             @_localizer["FinanceAccounts"]
         </MudNavLink>
+        <MudNavLink Href="@PageNames.Finances.InvestmentList" Icon="@Icons.Material.Outlined.CallToAction">
+            @_localizer["Investments"]
+        </MudNavLink>
+        <MudNavLink Href="@PageNames.Finances.TransactionList" Icon="@Icons.Material.Outlined.CallToAction">
+            @_localizer["Transactions"]
+        </MudNavLink>
     }
- 
+
     <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal"]</MudListSubheader>
     @if (_canViewDashboards)
     {
@@ -65,7 +71,7 @@
             <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
                 @_localizer["Hangfire"]
             </MudNavLink>
-        
+
             <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
                 @_localizer["Swagger"]
             </MudNavLink>
@@ -78,7 +84,7 @@
             @_localizer["Chat"]
         </MudNavLink>
     }
-  
+
 </MudNavMenu>
 
 @code {

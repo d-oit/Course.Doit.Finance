@@ -7,6 +7,7 @@ namespace BlazorHero.CleanArchitecture.Application.Interfaces.Services
 {
     public interface IFinanceAccountValueNameService
     {
+        void ClearNamesCache();
         Task<IResult<IEnumerable<NameValueResponse>>> GetAllAsync();
     }
     

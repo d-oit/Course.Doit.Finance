@@ -6,23 +6,16 @@ using BlazorHero.CleanArchitecture.Application.Interfaces.Services;
 using BlazorHero.CleanArchitecture.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace BlazorHero.CleanArchitecture.Server.Controllers.v1.Finance
 {
     public class FinanceAccountsController : BaseApiController<FinanceAccountsController>
     {
-        private readonly IFinanceAccountValueNameService _financeAccountValueNameService;
+        private IFinanceAccountValueNameService _financeAccountValueNameServiceInstance;
 
-        public FinanceAccountsController()
-        {
-        }
-
-        public FinanceAccountsController(IFinanceAccountValueNameService financeAccountValueNameService)
-        {
-            this._financeAccountValueNameService = financeAccountValueNameService;
-        }
-
+        protected IFinanceAccountValueNameService _financeAccountValueNameService => _financeAccountValueNameServiceInstance ??= HttpContext.RequestServices.GetService<IFinanceAccountValueNameService>();
 
 
         /// <summary>
