@@ -1,8 +1,8 @@
-@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditInvestmentModal> _localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
 
 <EditForm Model="@AddEditInvestmentModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog>
+    <MudDialog >
         <TitleContent>
             @{
                 if (AddEditInvestmentModel.Id == 0)
@@ -22,28 +22,77 @@
             }
         </TitleContent>
         <DialogContent>
-            <MudGrid>
-                @if (AddEditInvestmentModel.Id != 0)
-                {
-                    <MudItem xs="12" md="6">
-                        <MudTextField Disabled For="@(() => AddEditInvestmentModel.Id)" @bind-Value="AddEditInvestmentModel.Id" Label="@_localizer["Id"]" />
-                    </MudItem>
-                }
-                @* TODO: Insert Data Member Here *@
-                @*<MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditInvestmentModel.Name)" @bind-Value="AddEditInvestmentModel.Name" Label="@_localizer["Name"]" />
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditInvestmentModel.Description)" @bind-Value="AddEditInvestmentModel.Description" Label="@_localizer["Description"]" />
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudAutocomplete T="int" Label="@_localizer["Brand"]" For="@(() => AddEditInvestmentModel.BrandId)" @bind-Value="AddEditInvestmentModel.BrandId" ResetValueOnEmptyText="true" SearchFunc="@SearchBrands" Variant="Variant.Filled" ToStringFunc="@(i => _brands.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudTextField For="@(() => AddEditInvestmentModel.Rate)" @bind-Value="AddEditInvestmentModel.Rate" Label="@_localizer["Rate"]" />
-                </MudItem>
-                *@
-            </MudGrid>
+            <MudExpansionPanels MultiExpansion="true">
+                <MudExpansionPanel Text="@_localizer["General"]">
+                    <MudGrid>
+                        @if (AddEditInvestmentModel.Id != 0)
+                        {
+                            <MudItem xs="12" md="6">
+                                <MudTextField Disabled For="@(() => AddEditInvestmentModel.Id)" @bind-Value="AddEditInvestmentModel.Id" Label="@_localizer["Id"]" />
+                            </MudItem>
+                        }
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => AddEditInvestmentModel.Name)" @bind-Value="AddEditInvestmentModel.Name" Label="@_localizer["Name"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => AddEditInvestmentModel.Code)" @bind-Value="AddEditInvestmentModel.Code" Label="@_localizer["Code"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => AddEditInvestmentModel.No)" @bind-Value="AddEditInvestmentModel.No" Label="@_localizer["No"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => AddEditInvestmentModel.Type)" @bind-Value="AddEditInvestmentModel.Type" Label="@_localizer["Type"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudAutocomplete T="int" Label="@_localizer["FinanceAccount"]" @bind-Value="AddEditInvestmentModel.FinanceAccountId" ResetValueOnEmptyText="true" SearchFunc="@SearchFinanceAccounts" ToStringFunc="@(i => _financeAccounts.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.InvestmentValue" Label="@_localizer["InvestmentValue"]" Format="n2" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudCheckBox @bind-Checked="AddEditInvestmentModel.IsActive" Label="@_localizer["IsActive"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudDatePicker @bind-Date="AddEditInvestmentModel.InvestmentEndDate" Label="@_localizer["InvestmentEndDate"]" />
+                        </MudItem>
+                    </MudGrid>
+                </MudExpansionPanel>
+                <MudExpansionPanel Text="@_localizer["Additional"]">
+                    <MudGrid>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" For="@(() => AddEditInvestmentModel.ISIN)" @bind-Value="AddEditInvestmentModel.ISIN" Label="@_localizer["ISIN"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" For="@(() => AddEditInvestmentModel.WKN)" @bind-Value="AddEditInvestmentModel.WKN" Label="@_localizer["WKN"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" For="@(() => AddEditInvestmentModel.EmmissionNo)" @bind-Value="AddEditInvestmentModel.EmmissionNo" Label="@_localizer["EmmissionNo"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" For="@(() => AddEditInvestmentModel.TACode)" @bind-Value="AddEditInvestmentModel.TACode" Label="@_localizer["TACode"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.NominalValueOfAnInvestment" Label="@_localizer["NominalValueOfAnInvestment"]" Step="100" Format="n2" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.Quantity" Label="@_localizer["Quantity"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.DividendReturnPercentage" Label="@_localizer["DividendReturnPercentage"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.TotalReturnPercentage" Label="@_localizer["TotalReturnPercentage"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudDatePicker @bind-Date="AddEditInvestmentModel.InterestClaimSinceDate" Label="@_localizer["InterestClaimSinceDate"]" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudNumericField @bind-Value="AddEditInvestmentModel.DaysLate" Label="@_localizer["DaysLate"]" Step="14" />
+                        </MudItem>
+                    </MudGrid>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+
         </DialogContent>
         <DialogActions>
             <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>

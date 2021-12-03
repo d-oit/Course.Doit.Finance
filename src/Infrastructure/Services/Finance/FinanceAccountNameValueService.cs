@@ -26,14 +26,14 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Services.Finance
             this._cache = cache;
         }
 
-        public async Task<IResult<IEnumerable<NameValueResponse>>> GetAllAsync()
+        public async Task<IResult<IEnumerable<NameIntValueResponse>>> GetAllAsync()
         {
             var model = await _cache.GetOrAddAsync(ApplicationConstants.Cache.FinanceAccountValueNamesCacheKey, async () =>
             {
                 var list = await _context.FinanceAccounts.Where(x => x.IsActive)
-                    .Select(x => new NameValueResponse { Id = x.Id, Name = x.Name })
+                    .Select(x => new NameIntValueResponse { Id = x.Id, Name = x.Name })
                     .OrderByDescending(a => a.Id).ToListAsync();
-                return await Result<IEnumerable<NameValueResponse>>.SuccessAsync(list);
+                return await Result<IEnumerable<NameIntValueResponse>>.SuccessAsync(list);
             }, cacheExpiry);
 
             return model;

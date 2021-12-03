@@ -35,10 +35,10 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         public string Code { get => _code; set => _code = StringExt.Truncate(value?.ToUpperInvariant(), _codeLength); }
 
         [DataType(DataType.DateTime)]
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; } = System.DateTime.Now.Date; // https://stackoverflow.com/questions/65676683/mudblazor-datepicker-binding-works-one-way-only
 
         [DataType(DataType.Date)]
-        public DateTime PostingDate { get; set; }
+        public DateTime? PostingDate { get; set; }
 
         [StringLength(100)]
         public string DocumentNo { get; set; } = "";
@@ -54,8 +54,6 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
 
         [ForeignKey(nameof(FinanceAccountId))]
         public FinanceAccount FinanceAccount { get; set; }
-
-
 
         [StringLength(700)]
         public string Receiver { get; set; }

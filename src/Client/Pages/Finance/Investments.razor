@@ -31,7 +31,7 @@ else
             }
         </div>
         <MudSpacer />
-        <MudAutocomplete T="NameValueResponse" ToStringFunc="@(e=> e==null?null : $"{e.Name})")" Label="@_localizer[""]" @bind-Value="FilterFinanceAccount" SearchFunc="@SearchFinanceAccount"
+        <MudAutocomplete T="NameIntValueResponse" ToStringFunc="@(e=> e==null?null : $"{e.Name}")" Label="@_localizer["FinanceAccount"]" @bind-Value="FilterFinanceAccount" SearchFunc="@SearchFinanceAccount"
                          ResetValueOnEmptyText="true" />
         <MudSpacer />
         @if (_canSearchInvestments)
@@ -41,8 +41,8 @@ else
     </ToolBarContent>
 
     <HeaderContent>
-        <MudTh><MudTableSortLabel T="GetAllPagedInvestmentsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel T="GetAllPagedInvestmentsResponse" SortLabel="Name" S>@_localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh Class="clm-row-small"><MudTableSortLabel T="GetAllPagedInvestmentsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedInvestmentsResponse" SortLabel="Name" InitialDirection="SortDirection.Ascending">@_localizer["Name"]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel T="GetAllPagedInvestmentsResponse" SortLabel="No">@_localizer["No"]</MudTableSortLabel></MudTh>
         @if (!FilterByFinanceAccount)
             {
@@ -64,13 +64,14 @@ else
         @if (!FilterByFinanceAccount)
             {
             <MudTd DataLabel="FinanceAccountName">
+                @context.FinanceAccountName
             </MudTd>
             }
         <MudTd DataLabel="InvestmentValue">@context.InvestmentValue.ToString("n2")</MudTd>
         <MudTd DataLabel="Type">
             <MudHighlighter Text="@context.Type" HighlightedText="@_searchString" />
         </MudTd>
-        <MudTd DataLabel="InterestClaimSinceDate">@context.InterestClaimSinceDate.ToShortDateString()</MudTd>
+        <MudTd DataLabel="InterestClaimSinceDate">@context.InterestClaimSinceDate.Value.ToShortDateString()</MudTd>
         <MudTd DataLabel="Actions" Style="text-align: right">
             @if (_canEditInvestments || _canDeleteInvestments)
                 {

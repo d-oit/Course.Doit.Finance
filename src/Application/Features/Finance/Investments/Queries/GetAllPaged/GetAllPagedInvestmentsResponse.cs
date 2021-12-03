@@ -8,53 +8,22 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.
     public class GetAllPagedInvestmentsResponse
     {
         public long Id { get; set; }
-        private string _code = "";
-        private string _name;
+        public string Name { get; set; }
 
-        public const int _codeLength = 50;
-        public const int _nameLength = 400;
-        public const int _typeLength = 400;
-        public const int emmisionNoLength = 100;
-
-        [StringLength(_nameLength)]
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                if (!string.IsNullOrEmpty(value) && string.IsNullOrEmpty(Code))
-                {
-                    Code = _name.ToUpperInvariant().Trim();
-                };
-            }
-        }
-
-        [StringLength(_codeLength)]
-        public string Code { get => _code; set => _code = StringExt.Truncate(value?.ToUpperInvariant(), _codeLength); }
-
-        [Required]
+        public string Code { get; set; }
         public long FinanceAccountId { get; set; }
 
         public string FinanceAccountName { get; set; }
 
-        [StringLength(100)]
         public string No { get; set; }
-
 
         public decimal InvestmentValue { get; set; }
 
-
-
         public bool IsActive { get; set; }
 
-        [StringLength(_typeLength)]
-        public string Type { get; set; } = "Finanzierung"; // Bestand, Aktien, Crowdfunding...
+        public string Type { get; set; }
 
-
-        public DateTime InterestClaimSinceDate { get; set; } = DateTime.UtcNow.Date;
-
-
+        public DateTime? InterestClaimSinceDate { get; set; }
 
         public static GetAllPagedInvestmentsResponse Map(Investment entity)
         {

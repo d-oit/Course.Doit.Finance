@@ -15,9 +15,9 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
 
         public string Code { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; }
 
-        public DateTime PostingDate { get; set; }
+        public DateTime? PostingDate { get; set; }
 
         public string DocumentNo { get; set; }
 

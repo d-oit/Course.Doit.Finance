@@ -44,6 +44,10 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.
                 {
                     record.No = Guid.NewGuid().ToString();
                 }
+                if (string.IsNullOrWhiteSpace(record.Code))
+                {
+                    record.Name = command.Name;
+                }
                 await _unitOfWork.Repository<Investment>().AddAsync(record);
                 await _unitOfWork.Commit(cancellationToken);
                 return await Result<long>.SuccessAsync(record.Id, "Create Record Successfully");

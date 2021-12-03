@@ -41,9 +41,11 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
         private bool _canDeleteInvestments;
         private bool _canSearchInvestments;
         private bool _loaded;
+        private List<NameIntValueResponse> _financeAccountNames;
+
         private bool FilterByFinanceAccount { get; set; }
 
-        private NameValueResponse FilterFinanceAccount { get; set; }
+        private NameIntValueResponse FilterFinanceAccount { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -61,10 +63,12 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             }
         }
 
-        private async Task<IEnumerable<NameValueResponse>> SearchFinanceAccount(string value)
+        private async Task<IEnumerable<NameIntValueResponse>> SearchFinanceAccount(string value)
         {
-            var names = await FinanceAccountManager.GetFinanceAccountNamesAsync();
-
+            if (_financeAccountNames == null)
+            {
+                _financeAccountNames = await FinanceAccountManager.GetFinanceAccountNamesAsync();
+            }
             FilterByFinanceAccount = false;
             if (FilterFinanceAccount != null && FilterFinanceAccount.Id > 0)
             {
@@ -72,9 +76,9 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             }
             // if text is null or empty, show complete list
             if (string.IsNullOrEmpty(value))
-                return names;
+                return _financeAccountNames;
 
-            return names.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return _financeAccountNames.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private async Task<TableData<GetAllPagedInvestmentsResponse>> ServerReload(TableState state)
@@ -89,6 +93,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
 
         private async Task LoadData(int pageNumber, int pageSize, TableState state)
         {
+
             string[] orderings = new[] { "Name" };
             if (!string.IsNullOrEmpty(state.SortLabel))
             {
@@ -123,7 +128,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             var parameters = new DialogParameters();
             if (id != 0)
             {
-                var investment = InvestmentManager.GetByIdAsync(id);
+                var investment = await InvestmentManager.GetByIdAsync(id);
                 if (investment != null)
                 {
                     parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), investment);

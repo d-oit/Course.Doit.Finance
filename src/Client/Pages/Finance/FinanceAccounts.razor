@@ -36,16 +36,16 @@ else
         }
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
+        <MudTh Class="clm-row-small"><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
 
-        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name" Enabled>@_localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Name" InitialDirection="SortDirection.Ascending">@_localizer["Name"]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="Type">@_localizer["Type"]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="InitAmount">@_localizer["InitAmount"]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel T="GetAllPagedFinanceAccountsResponse" SortLabel="IsActive">@_localizer["IsActive"]</MudTableSortLabel></MudTh>
         <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Id" Class="clm-row-small">@context.Id</MudTd>
         <MudTd DataLabel="Name">
             <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
         </MudTd>

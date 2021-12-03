@@ -1,7 +1,8 @@
 @attribute [Route(PageNames.Finances.TransactionList)]
 @attribute [Authorize(Policy = Permissions.Transactions.View)]
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Transactions> _localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
 @using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetAllPaged;
+@using BlazorHero.CleanArchitecture.Application.Requests
 
 <style>
     .mud-table-container {
@@ -30,37 +31,46 @@ else
             }
         </div>
         <MudSpacer />
+        <MudAutocomplete T="NameIntValueResponse" ToStringFunc="@(e=> e==null?null : $"{e.Name}")" Label="@_localizer["FinanceAccount"]" @bind-Value="FilterFinanceAccount" SearchFunc="@SearchFinanceAccount"
+                         ResetValueOnEmptyText="true" />
+        <MudSpacer />
         @if (_canSearchTransactions)
         {
             <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         }
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
-        @* TODO: Insert Data Member Here *@
-        @*<MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Brand">@_localizer["Brand"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Description">@_localizer["Description"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Barcode">@_localizer["Barcode"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Rate">@_localizer["Rate"]</MudTableSortLabel></MudTh>*@
+        <MudTh Class="clm-row-small"><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Name" InitialDirection="SortDirection.Ascending">@_localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="DateTime">@_localizer["Date"]</MudTableSortLabel></MudTh>
+        @if (!FilterByFinanceAccount)
+            {
+            <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="FinanceAccountName">@_localizer["FinanceAccountName"]</MudTableSortLabel></MudTh>
+            }
+        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Receiver">@_localizer["Receiver"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="TransactionType">@_localizer["TransactionType"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="GetAllPagedTransactionsResponse" SortLabel="Amount">@_localizer["Amount"]</MudTableSortLabel></MudTh>
+
         <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
-        @* TODO: Insert Data Member Here *@
-        @*<MudTd DataLabel="Name">
+        <MudTd DataLabel="Name">
             <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="DateTime">
+            @context.DateTime.Value.ToShortDateString()
+        </MudTd>
+        @if (!FilterByFinanceAccount)
+            {
+            <MudTd DataLabel="FinanceAccountName">
             </MudTd>
-            <MudTd DataLabel="Brand">
-            <MudHighlighter Text="@context.Brand" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Description">
-            <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Barcode">
-            <MudHighlighter Text="@context.Barcode" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Rate">@context.Rate</MudTd>*@
+            }
+        <MudTd DataLabel="Reviever">@context.Receiver</MudTd>
+        <MudTd DataLabel="TransactionType">
+            @_localizer[context.TransactionType.ToString()]
+        </MudTd>
+        <MudTd DataLabel="InterestClaimSinceDate">@context.Amount.ToString("n2")</MudTd>
         <MudTd DataLabel="Actions" Style="text-align: right">
             @if (_canEditTransactions || _canDeleteTransactions)
                 {

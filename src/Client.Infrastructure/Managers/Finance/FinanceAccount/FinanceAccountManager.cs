@@ -45,14 +45,11 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Fi
             return await response.ToResult<int>();
         }
 
-        public async Task<List<NameValueResponse>> GetFinanceAccountNamesAsync()
+        public async Task<List<NameIntValueResponse>> GetFinanceAccountNamesAsync()
         {
             var response = await _httpClient.GetAsync(Routes.FinanceAccountsEndpoints.GetFinanceAccountNames());
-
-            return (List<NameValueResponse>)await response.ToResult<List<NameValueResponse>>();
-
-
-
+            var list = await response.ToResult<List<NameIntValueResponse>>();
+            return list.Data;
         }
     }
 }

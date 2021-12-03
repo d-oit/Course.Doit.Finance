@@ -9,7 +9,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
 
     public class Investment : AuditableEntity<long>
     {
-        private string _code = "";
+        private string _code;
         private string _name;
 
         public const int _codeLength = 50;
@@ -74,7 +74,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         public string Type { get; set; } = "Finanzierung"; // Bestand, Aktien, Crowdfunding...
 
         [DataType(DataType.Date)]
-        public DateTime InterestClaimSinceDate { get; set; }
+        public DateTime? InterestClaimSinceDate { get; set; } = DateTime.Now.Date;
 
         public int? DaysLate { get; set; }
     }

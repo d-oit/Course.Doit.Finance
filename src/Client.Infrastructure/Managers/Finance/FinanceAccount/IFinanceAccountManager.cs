@@ -18,6 +18,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Fi
         Task<IResult<int>> SaveAsync(AddEditFinanceAccountCommand request);
 
         Task<IResult<int>> DeleteAsync(int id);
-        Task<List<NameValueResponse>> GetFinanceAccountNamesAsync();
+        Task<List<NameIntValueResponse>> GetFinanceAccountNamesAsync();
     }
 }

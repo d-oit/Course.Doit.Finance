@@ -4,6 +4,7 @@ using BlazorHero.CleanArchitecture.Application.Specifications.Finance;
 using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
 using BlazorHero.CleanArchitecture.Shared.Wrapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;

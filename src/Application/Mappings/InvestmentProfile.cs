@@ -1,7 +1,7 @@
 using AutoMapper;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Commands.AddEdit;
+using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Queries.GetById;
 using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
-using System;
 
 namespace BlazorHero.CleanArchitecture.Application.Mappings
 {
@@ -10,6 +10,7 @@ namespace BlazorHero.CleanArchitecture.Application.Mappings
         public InvestmentProfile()
         {
             CreateMap<AddEditInvestmentCommand, Investment>().ReverseMap();
+            CreateMap<GetInvestmentByIdResponse, Investment>().ReverseMap();
         }
     }
 }

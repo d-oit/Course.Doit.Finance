@@ -35,9 +35,8 @@ namespace BlazorHero.CleanArchitecture.Server.Controllers.v1.Finance
         }
 
         [Authorize(Policy = Permissions.FinanceAccounts.View)]
-        [HttpGet]
-        [Route("~/financeaccounts/names")]
-        public async Task<IActionResult> GetAllNames()
+        [HttpGet("names")]
+        public async Task<IActionResult> GetNamesAsync()
         {
             var list = await _financeAccountValueNameService.GetAllAsync();
             return Ok(list);

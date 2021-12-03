@@ -1,6 +1,8 @@
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetAllPaged;
+using BlazorHero.CleanArchitecture.Application.Requests;
 using BlazorHero.CleanArchitecture.Application.Requests.Finance;
 using BlazorHero.CleanArchitecture.Client.Extensions;
+using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.FinanceAccount;
 using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Transaction;
 using BlazorHero.CleanArchitecture.Shared.Constants.Application;
 using BlazorHero.CleanArchitecture.Shared.Constants.Permission;
@@ -8,7 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -17,6 +21,8 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
     public partial class Transactions
     {
         [Inject] private ITransactionManager TransactionManager { get; set; }
+
+        [Inject] private IFinanceAccountManager FinanceAccountManager { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -36,6 +42,12 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
         private bool _canSearchTransactions;
         private bool _loaded;
 
+        private bool FilterByFinanceAccount { get; set; }
+
+        private NameIntValueResponse FilterFinanceAccount { get; set; }
+
+        List<NameIntValueResponse> _financeAccountNames;
+
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
@@ -52,6 +64,23 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             }
         }
 
+        private async Task<IEnumerable<NameIntValueResponse>> SearchFinanceAccount(string value)
+        {
+            if (_financeAccountNames == null)
+            {
+                _financeAccountNames = await FinanceAccountManager.GetFinanceAccountNamesAsync();
+            }
+            FilterByFinanceAccount = false;
+            if (FilterFinanceAccount != null && FilterFinanceAccount.Id > 0)
+            {
+                FilterByFinanceAccount = true;
+            }
+            // if text is null or empty, show complete list
+            if (string.IsNullOrEmpty(value))
+                return _financeAccountNames;
+
+            return _financeAccountNames.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        }
         private async Task<TableData<GetAllPagedTransactionsResponse>> ServerReload(TableState state)
         {
             if (!string.IsNullOrWhiteSpace(_searchString))
@@ -100,7 +129,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             {
                 if (id != 0)
                 {
-                    var record = TransactionManager.GetByIdAsync(id);
+                    var record = await TransactionManager.GetByIdAsync(id);
                     if (record != null)
                     {
                         parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), record);

@@ -6,8 +6,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace BlazorHeroHelper
 {
@@ -27,9 +29,11 @@ namespace BlazorHeroHelper
 
         private void WriteConfig(string path, string content)
         {
-            try { 
+            try
+            {
                 new FileInfo(path).Directory.Create();
-            } catch (Exception) { }
+            }
+            catch (Exception) { }
             if (File.Exists(path))
             {
                 MessageBox.Show("File " + path + " is already existed... Aborting...");
@@ -40,7 +44,7 @@ namespace BlazorHeroHelper
 
         private void textBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            using(var ofd = new OpenFileDialog())
+            using (var ofd = new OpenFileDialog())
             {
                 ofd.ShowDialog();
                 if (ofd.FileName != null)
@@ -76,7 +80,8 @@ namespace BlazorHeroHelper
                 entityNamespace = nameSpace + ".Entities." + folderPrefix.Text;
                 entityContent = entityContent.Replace("$_NAMESPACE_$", nameSpace + ".Entities." + folderPrefix.Text);
             }
-            else {
+            else
+            {
                 entityNamespace = nameSpace + ".Entities";
                 entityContent = entityContent.Replace("$_NAMESPACE_$", nameSpace + ".Entities");
             }
@@ -512,7 +517,7 @@ namespace BlazorHeroHelper
 
             WriteConfig(requestPath, requestContent);
 
-            
+
 
             return requestNamespace;
         }
@@ -726,6 +731,96 @@ namespace BlazorHeroHelper
         private void HeroHelper_Load(object sender, EventArgs e)
         {
             defaultDatatype.SelectedIndex = 0;
+        }
+
+
+
+        private void buttonUiAddEditCodeGenerator_Click(object sender, EventArgs e)
+        {
+            var text = richTextBoxCodeGenerator.Text;
+            var properties = Regex.Matches(text, @"public (?<type>[^\s]+)\s(?<name>[^\s]+)");
+
+            string lineOutput = "";
+            foreach (Match item in properties)
+            {
+                var group = item.Groups;
+                var type = group[1].Value;
+                var name = group[2].Value;
+
+                lineOutput += "<MudItem xs=\"12\" md=\"6\">\n";
+
+                switch (type)
+                {
+                    case "DateTime?":
+                    case "DateTime":
+                        lineOutput += $"<MudDatePicker @bind-Date=\"{textBoxModelName.Text}.{name}\" Label=\"@_localizer[\"{name}\"]\" />\n";
+                        break;
+                    case "double":
+                    case "double?":
+                    case "decimal":
+                    case "decimal?":
+                        lineOutput += $"<MudNumericField @bind-Value=\"{textBoxModelName.Text}.{name}\" Label=\"@_localizer[\"{name}\"]\" Step=\"100\" Format=\"n2\" />\n";
+                        break;
+                    case "int":
+                    case "int?":
+                        lineOutput += $"<MudNumericField @bind-Value=\"{textBoxModelName.Text}.{name}\" Label=\"@_localizer[\"{name}\"]\" />\n";
+                        break;
+                    case "bool":
+                        lineOutput += $"<MudCheckBox @bind-Checked=\"{textBoxModelName.Text}.{name}\"  Label=\"@_localizer[\"{name}\"]\"  />\n";
+                        break;
+                    case string:
+                        lineOutput += $"<MudTextField T=\"string\" For= \"@(() => {textBoxModelName.Text}.{name})\" @bind-Value=\"{textBoxModelName.Text}.{name}\" Label=\"@_localizer[\"{name}\"]\" />\n";
+                        break;
+                    default:
+                        lineOutput += $"ToDo: {name}\n";
+                        break;
+
+                }
+
+                lineOutput += "</MudItem> \n";
+            }
+
+            richTextBoxPocoResult.Text = lineOutput;
+        }
+
+        private void buttonGeneratListCode_Click(object sender, EventArgs e)
+        {
+            var text = richTextBoxCodeGenerator.Text;
+            var properties = Regex.Matches(text, @"public (?<type>[^\s]+)\s(?<name>[^\s]+)");
+
+
+            string lineOutput = "<HeaderContent>";
+            lineOutput += $"<MudTh Class=\"clm-row-small\"><MudTableSortLabel T=\"{textBoxModelName.Text}\" SortLabel=\"Id\">@_localizer[\"Id\"]</MudTableSortLabel></MudTh>\n";
+
+            // header
+            foreach (Match item in properties)
+            {
+                var group = item.Groups;
+                var type = group[1].Value;
+                var name = group[2].Value;
+
+                lineOutput += $"<MudTh><MudTableSortLabel T=\"{textBoxModelName.Text}\" SortLabel=\"{name}\">@_localizer[\"{name}\"]</MudTableSortLabel></MudTh>\n";
+
+            }
+            lineOutput += "<MudTh Style=\"text-align:right\">@_localizer[\"Actions\"]</MudTh>\n";
+            lineOutput += "</HeaderContent>\n";
+
+            // RowTemplate
+            lineOutput += "<RowTemplate>\n";
+            lineOutput += $"<MudTd DataLabel=\"Id\">@context.Id</MudTd>\n";
+
+            // header
+            foreach (Match item in properties)
+            {
+                var group = item.Groups;
+                var type = group[1].Value;
+                var name = group[2].Value;
+
+                lineOutput += $"<MudTd DataLabel=\"{name}\">@context.{name}</MudTd>\n";
+
+            }
+
+            richTextBoxPocoResult.Text = lineOutput;
         }
     }
 }

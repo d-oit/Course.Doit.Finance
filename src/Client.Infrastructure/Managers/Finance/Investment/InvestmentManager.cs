@@ -34,7 +34,8 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.In
         public async Task<IResult<GetInvestmentByIdResponse>> GetByIdAsync(long id)
         {
             var response = await _httpClient.GetAsync(Routes.InvestmentsEndpoints.GetById(id));
-            return await response.ToResult<GetInvestmentByIdResponse>();
+            var result = await response.ToResult<GetInvestmentByIdResponse>();
+            return result;
         }
 
         public async Task<IResult<long>> SaveAsync(AddEditInvestmentCommand request)
