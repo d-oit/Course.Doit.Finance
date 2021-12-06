@@ -129,14 +129,17 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             {
                 if (id != 0)
                 {
-                    var record = await TransactionManager.GetByIdAsync(id);
+                    var record = await TransactionManager.GetEditByIdAsync(id);
                     if (record != null)
                     {
-                        parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), record);
+                        if (record.Succeeded)
+                        {
+                            parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), record.Data);
+                        }
                     }
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, FullWidth = false, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEditTransactionModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)

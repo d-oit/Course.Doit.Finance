@@ -1,3 +1,4 @@
+using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Queries.GetAllPaged;
 using BlazorHero.CleanArchitecture.Application.Requests;
 using BlazorHero.CleanArchitecture.Application.Requests.Finance;
@@ -128,13 +129,16 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
             var parameters = new DialogParameters();
             if (id != 0)
             {
-                var investment = await InvestmentManager.GetByIdAsync(id);
+                var investment = await InvestmentManager.GetEditByIdAsync(id);
                 if (investment != null)
                 {
-                    parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), investment);
+                    if (investment.Succeeded)
+                    {
+                        parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), investment.Data);
+                    }
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, FullWidth = false, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEditInvestmentModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)

@@ -329,13 +329,16 @@ namespace $_NAMESPACE_$
             var parameters = new DialogParameters();
             if (id != 0)
             {
-                var record = $_ENTITY_$Manager.GetByIdAsync(id);
-                if (record != null)
-                {
-                    parameters.Add(nameof(AddEdit$_ENTITY_$Modal.AddEdit$_ENTITY_$Model), record);
+                var record = $_ENTITY_$Manager.GetEditByIdAsync(id);
+                 if (record != null)
+                 {
+                    if (record.Succeeded)
+                    {
+                        parameters.Add(nameof(AddEdit$_ENTITY_$Modal.AddEdit$_ENTITY_$Model), record);
+                    }
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEdit$_ENTITY_$Modal>(id == 0 ? _localizer[""Create""] : _localizer[""Edit""], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)

@@ -18,6 +18,8 @@ namespace $_NAMESPACE_$
 
         Task<IResult<Get$_ENTITY_$ByIdResponse>> GetByIdAsync(long id);
 
+        Task<IResult<Get$_ENTITY_$ByIdResponse>> GetEditByIdAsync(long id);
+
         Task<IResult<$_DEFAULT_ID_DATATYPE_$>> SaveAsync(AddEdit$_ENTITY_$Command request);
 
         Task<IResult<$_DEFAULT_ID_DATATYPE_$>> DeleteAsync($_DEFAULT_ID_DATATYPE_$ id);
@@ -61,6 +63,12 @@ namespace $_NAMESPACE_$
         {
             var response = await _httpClient.GetAsync(Routes.$_ENTITY_$sEndpoints.GetById(id));
             return await response.ToResult<Get$_ENTITY_$ByIdResponse>();
+        }
+
+        public async Task<IResult<AddEdit$_ENTITY_$Command>> GetEditByIdAsync(long id)
+        {
+            var response = await _httpClient.GetAsync(Routes.$_ENTITY_$sEndpoints.GetById(id));
+            return await response.ToResult<AddEdit$_ENTITY_$Command>();
         }
 
         public async Task<IResult<$_DEFAULT_ID_DATATYPE_$>> SaveAsync(AddEdit$_ENTITY_$Command request)

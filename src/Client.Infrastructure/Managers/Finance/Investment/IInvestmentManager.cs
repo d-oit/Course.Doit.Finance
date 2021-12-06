@@ -16,5 +16,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.In
         Task<IResult<long>> SaveAsync(AddEditInvestmentCommand request);
 
         Task<IResult<long>> DeleteAsync(long id);
+        Task<IResult<AddEditInvestmentCommand>> GetEditByIdAsync(long id);
     }
 }

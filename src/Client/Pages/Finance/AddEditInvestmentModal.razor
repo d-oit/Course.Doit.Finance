@@ -2,7 +2,7 @@
 
 <EditForm Model="@AddEditInvestmentModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog >
+    <MudDialog>
         <TitleContent>
             @{
                 if (AddEditInvestmentModel.Id == 0)

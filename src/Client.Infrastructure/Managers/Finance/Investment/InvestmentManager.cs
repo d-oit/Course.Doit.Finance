@@ -38,6 +38,13 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.In
             return result;
         }
 
+        public async Task<IResult<AddEditInvestmentCommand>> GetEditByIdAsync(long id)
+        {
+            var response = await _httpClient.GetAsync(Routes.InvestmentsEndpoints.GetById(id));
+            var result = await response.ToResult<AddEditInvestmentCommand>();
+            return result;
+        }
+
         public async Task<IResult<long>> SaveAsync(AddEditInvestmentCommand request)
         {
             var response = await _httpClient.PostAsJsonAsync(Routes.InvestmentsEndpoints.Save, request);

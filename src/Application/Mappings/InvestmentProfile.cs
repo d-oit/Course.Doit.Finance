@@ -11,6 +11,7 @@ namespace BlazorHero.CleanArchitecture.Application.Mappings
         {
             CreateMap<AddEditInvestmentCommand, Investment>().ReverseMap();
             CreateMap<GetInvestmentByIdResponse, Investment>().ReverseMap();
+            CreateMap<GetInvestmentByIdResponse, AddEditInvestmentCommand>().ReverseMap();
         }
     }
 }

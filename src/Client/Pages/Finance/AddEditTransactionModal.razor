@@ -38,9 +38,9 @@
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudSelect @bind-Value="AddEditTransactionModel.TransactionType" HelperText="@_localizer["TransactionType"]">
-                                @foreach (var item in Enum.GetValues(typeof(TransactionType)))
+                                @foreach (TransactionType item in Enum.GetValues(typeof(TransactionType)))
                                 {
-                                    <MudSelectItem Value="@item">@_localizer[@item.ToString()]</MudSelectItem>
+                                    <MudSelectItem Value="@item">@item</MudSelectItem>
                                 }
                             </MudSelect>
                         </MudItem>

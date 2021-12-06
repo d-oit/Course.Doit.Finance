@@ -1,3 +1,4 @@
+using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetAllPaged;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetById;
@@ -35,6 +36,12 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Tr
         {
             var response = await _httpClient.GetAsync(Routes.TransactionsEndpoints.GetById(id));
             return await response.ToResult<GetTransactionByIdResponse>();
+        }
+
+        public async Task<IResult<AddEditInvestmentCommand>> GetEditByIdAsync(long id)
+        {
+            var response = await _httpClient.GetAsync(Routes.TransactionsEndpoints.GetById(id));
+            return await response.ToResult<AddEditInvestmentCommand>();
         }
 
         public async Task<IResult<long>> SaveAsync(AddEditTransactionCommand request)

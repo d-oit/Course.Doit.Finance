@@ -1,3 +1,4 @@
+using BlazorHero.CleanArchitecture.Application.Features.Finance.Investments.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Commands.AddEdit;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetAllPaged;
 using BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions.Queries.GetById;
@@ -16,5 +17,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Finance.Tr
         Task<IResult<long>> SaveAsync(AddEditTransactionCommand request);
 
         Task<IResult<long>> DeleteAsync(long id);
+        Task<IResult<AddEditInvestmentCommand>> GetEditByIdAsync(long id);
     }
 }
