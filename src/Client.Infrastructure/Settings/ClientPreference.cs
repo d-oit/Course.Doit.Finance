@@ -10,6 +10,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Settings
         public bool IsRTL { get; set; }
         public bool IsDrawerOpen { get; set; }
         public string PrimaryColor { get; set; }
-        public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de";
+        public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de-DE";
     }
 }

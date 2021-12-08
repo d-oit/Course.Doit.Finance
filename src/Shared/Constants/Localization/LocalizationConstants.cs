@@ -7,6 +7,11 @@
             {
                 Code = "de-DE",
                 DisplayName = "Deutsch"
+            },
+            new LanguageCode
+            {
+                Code = "en-US",
+                DisplayName = "English"
             }
         };
     }
