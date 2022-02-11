@@ -14,6 +14,7 @@
 @using Blazored.LocalStorage;
 @using Blazored.FluentValidation
 @using Microsoft.Extensions.Localization
+@using System.Globalization
 
 @*Client Services*@
 @using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Identity.Account
@@ -49,6 +50,7 @@
 
 @using BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication
 @using BlazorHero.CleanArchitecture.Client.Extensions
+
 
 @attribute [Authorize]
 @inject IAuthenticationManager _authenticationManager

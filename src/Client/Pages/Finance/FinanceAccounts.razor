@@ -1,7 +1,9 @@
 @attribute [Route(PageNames.Finances.FinanceAccountList)]
 @attribute [Authorize(Policy = Permissions.FinanceAccounts.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceAccounts> _localizer
+
 @using BlazorHero.CleanArchitecture.Application.Features.Finance.FinanceAccounts.Queries.GetAllPaged;
+@using System.Globalization
 
 <style>
     .mud-table-container {

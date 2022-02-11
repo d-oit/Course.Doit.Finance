@@ -117,61 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Konto</value>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
-  <data name="Administrator" xml:space="preserve">
-    <value>Administrator</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="Brands" xml:space="preserve">
-    <value>Marken</value>
-  </data>
-  <data name="Catalog Management" xml:space="preserve">
-    <value>Katalogverwaltung</value>
-  </data>
-  <data name="Communication" xml:space="preserve">
-    <value>Kommunikation</value>
-  </data>
-  <data name="Document Management" xml:space="preserve">
-    <value>Document Management</value>
-  </data>
-  <data name="Document Types" xml:space="preserve">
-    <value>Document Types</value>
-  </data>
-  <data name="FAQs" xml:space="preserve">
-    <value>FAQs</value>
-  </data>
-  <data name="Features" xml:space="preserve">
-    <value>Features</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="FinanceAccounts" xml:space="preserve">
-    <value>Finanzkonten</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="Investments" xml:space="preserve">
-    <value>Investionen</value>
-  </data>
-  <data name="Personal" xml:space="preserve">
-    <value>Persönlich</value>
-  </data>
-  <data name="Products" xml:space="preserve">
-    <value>Produkte</value>
-  </data>
-  <data name="Resources" xml:space="preserve">
-    <value>Ressourcen</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Rollen</value>
-  </data>
-  <data name="Swagger" xml:space="preserve">
-    <value>Swagger</value>
-  </data>
-  <data name="Transactions" xml:space="preserve">
-    <value>Buchungsvorgänge</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Nutzer</value>
+    <value>Finance accounts</value>
   </data>
 </root>

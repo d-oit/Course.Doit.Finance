@@ -22,17 +22,21 @@ namespace BlazorHero.CleanArchitecture.Client
 
             var host = builder.Build();
             var storageService = host.Services.GetRequiredService<ClientPreferenceManager>();
-            CultureInfo culture = culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de-DE");
+            CultureInfo culture = new(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "de-DE");
 
             if (storageService != null)
             {
                 var preference = await storageService.GetPreference() as ClientPreference;
                 if (preference != null)
                 {
-                    culture = new CultureInfo(preference.LanguageCode);
                     var js = host.Services.GetRequiredService<IJSRuntime>();
-                    var result = await js.InvokeAsync<string>("blazorCulture.get");
-                    await js.InvokeVoidAsync("blazorCulture.set", preference.LanguageCode);
+                    var currentBlazorCulture = await js.InvokeAsync<string>("blazorCulture.get");
+                    if (currentBlazorCulture == null)
+                    {
+                        currentBlazorCulture = preference.LanguageCode;
+                    }
+                    culture = new CultureInfo(currentBlazorCulture);
+                    await js.InvokeVoidAsync("blazorCulture.set", currentBlazorCulture);
                 }
             }
             CultureInfo.DefaultThreadCurrentCulture = culture;
