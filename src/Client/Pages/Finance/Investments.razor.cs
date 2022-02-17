@@ -138,7 +138,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
                     }
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, FullWidth = false, DisableBackdropClick = true };
+            var options = new DialogOptions { MaxWidth = MaxWidth.ExtraLarge };
             var dialog = _dialogService.Show<AddEditInvestmentModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)

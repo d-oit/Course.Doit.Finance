@@ -5,6 +5,7 @@
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 		<RootNamespace>BlazorHero.CleanArchitecture.Client</RootNamespace>
 		<AssemblyName>BlazorHero.CleanArchitecture.Client</AssemblyName>
+		<Copyright>Copyright 2022 - d.o.it</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>

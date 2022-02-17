@@ -4,7 +4,12 @@
 <MudRTLProvider RightToLeft="@_rightToLeft">
     <audio id="notification" src="/media/notification.mp3" />
     <MudThemeProvider Theme="_currentTheme" />
-    <MudDialogProvider />
+    <MudDialogProvider FullWidth="true"
+                       MaxWidth="MaxWidth.ExtraExtraLarge"
+                       CloseButton="true"
+                       DisableBackdropClick="true"
+                       Position="DialogPosition.Center"
+                       CloseOnEscapeKey="true" />
     <MudSnackbarProvider />
     <AuthorizeView>
         <NotAuthorized>
