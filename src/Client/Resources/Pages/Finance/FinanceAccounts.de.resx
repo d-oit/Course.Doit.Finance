@@ -186,4 +186,19 @@
   <data name="Dense" xml:space="preserve">
     <value>Kompakt</value>
   </data>
+  <data name="DaysLate" xml:space="preserve">
+    <value>Tage verspätet</value>
+  </data>
+  <data name="EmmissionNo" xml:space="preserve">
+    <value>Emmissions-Nr.</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="TACode" xml:space="preserve">
+    <value>TA Code</value>
+  </data>
+  <data name="TotalReturnPercentage" xml:space="preserve">
+    <value>Gesamtrendite %</value>
+  </data>
 </root>

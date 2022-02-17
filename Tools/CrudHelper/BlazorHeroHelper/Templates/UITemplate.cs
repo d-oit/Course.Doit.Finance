@@ -163,7 +163,7 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
-            <MudTh><MudTableSortLabel T=""GetAllPaged$_ENTITY_$sResponse"" SortLabel=""Id"">@_localizer[""Id""]</MudTableSortLabel></MudTh>
+            <MudTh Class=""clm-row-small""><MudTableSortLabel T=""GetAllPaged$_ENTITY_$sResponse"" SortLabel=""Id"">@_localizer[""Id""]</MudTableSortLabel></MudTh>
              @* TODO: Insert Data Member Here *@
             @*<MudTh><MudTableSortLabel T=""GetAllPaged$_ENTITY_$sResponse"" SortLabel=""Name"">@_localizer[""Name""]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T=""GetAllPaged$_ENTITY_$sResponse"" SortLabel=""Brand"">@_localizer[""Brand""]</MudTableSortLabel></MudTh>
@@ -173,7 +173,7 @@ else
             <MudTh Style=""text-align:right"">@_localizer[""Actions""]</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel=""Id"">@context.Id</MudTd>
+            <MudTd DataLabel=""Id"" Class=""clm-row-small"">@context.Id</MudTd>
              @* TODO: Insert Data Member Here *@
             @*<MudTd DataLabel=""Name"">
                 <MudHighlighter Text=""@context.Name"" HighlightedText=""@_searchString"" />

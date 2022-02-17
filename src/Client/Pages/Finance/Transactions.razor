@@ -54,7 +54,7 @@ else
         <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Id" Class="clm-row-small">@context.Id</MudTd>
         <MudTd DataLabel="Name">
             <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
         </MudTd>
