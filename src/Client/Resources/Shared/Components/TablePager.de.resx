@@ -117,64 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add Extended Attribute" xml:space="preserve">
-    <value>Hinzufügen</value>
+  <data name="InfoFormat" xml:space="preserve">
+    <value>{first_item}-{last_item} von {all_items}</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Datum</value>
-  </data>
-  <data name="Decimal" xml:space="preserve">
-    <value>Decimal</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="Entity Id" xml:space="preserve">
-    <value>Datenbank Id</value>
-  </data>
-  <data name="External Id" xml:space="preserve">
-    <value>External Id</value>
-  </data>
-  <data name="Group" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="Id" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="Is Active" xml:space="preserve">
-    <value>Aktiv</value>
-  </data>
-  <data name="Json" xml:space="preserve">
-    <value>Json</value>
-  </data>
-  <data name="Key" xml:space="preserve">
-    <value>Schlüssel</value>
-  </data>
-  <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
-  </data>
-  <data name="Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="Time" xml:space="preserve">
-    <value>Zeit</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Aktualisieren</value>
-  </data>
-  <data name="Update Extended Attribute" xml:space="preserve">
-    <value>Aktualiseren der Attribute</value>
+  <data name="RowsPerPageString" xml:space="preserve">
+    <value>Anzahl pro Seite:</value>
   </data>
 </root>

@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GoHome" xml:space="preserve">
-    <value>Zur Startseite gehen!</value>
+    <value>Zur Startseite</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Die gesuchte Seite existiert nicht!</value>
+    <value>Die gesuchte Seite existiert leider nicht!</value>
   </data>
 </root>

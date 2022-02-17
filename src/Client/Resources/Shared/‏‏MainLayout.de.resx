@@ -117,64 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add Extended Attribute" xml:space="preserve">
-    <value>Hinzufügen</value>
+  <data name="Account" xml:space="preserve">
+    <value>Konto</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="Chat?" xml:space="preserve">
+    <value>Chat</value>
   </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Löschen</value>
+  <data name="Logout" xml:space="preserve">
+    <value>Abmelden</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Datum</value>
+  <data name="Logout Confirmation" xml:space="preserve">
+    <value>Abmelden bestätigen</value>
   </data>
-  <data name="Decimal" xml:space="preserve">
-    <value>Decimal</value>
+  <data name="MudBlazor Documentation" xml:space="preserve">
+    <value>MudBlazor</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beschreibung</value>
+  <data name="Refreshed Token." xml:space="preserve">
+    <value>Token erneuern</value>
   </data>
-  <data name="Entity Id" xml:space="preserve">
-    <value>Datenbank Id</value>
+  <data name="Resources" xml:space="preserve">
+    <value>Ressourcen</value>
   </data>
-  <data name="External Id" xml:space="preserve">
-    <value>External Id</value>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
   </data>
-  <data name="Group" xml:space="preserve">
-    <value>Group</value>
+  <data name="Toggle Dark Mode" xml:space="preserve">
+    <value>Wechsel zu Dark Mode</value>
   </data>
-  <data name="Id" xml:space="preserve">
-    <value>Id</value>
+  <data name="Toggle right-to-left/left-to-right" xml:space="preserve">
+    <value>Wechsel zu rechts-nach-links/links-nach-rechts</value>
   </data>
-  <data name="Is Active" xml:space="preserve">
-    <value>Aktiv</value>
+  <data name="Welcome {0}" xml:space="preserve">
+    <value>Willkommen {0}</value>
   </data>
-  <data name="Json" xml:space="preserve">
-    <value>Json</value>
+  <data name="You are logged out because the Permissions of one of your Roles have been updated." xml:space="preserve">
+    <value>Es erfolgte eine Abmeldung da die Berechtigung für den Benutzer geändert wurden.</value>
   </data>
-  <data name="Key" xml:space="preserve">
-    <value>Schlüssel</value>
+  <data name="You are logged out because the user with your Token has been deleted." xml:space="preserve">
+    <value>Abmeldung erfolgt da die Sitzung beendet wurde.</value>
   </data>
-  <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
-  </data>
-  <data name="Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="Time" xml:space="preserve">
-    <value>Zeit</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Aktualisieren</value>
-  </data>
-  <data name="Update Extended Attribute" xml:space="preserve">
-    <value>Aktualiseren der Attribute</value>
+  <data name="You are Logged Out." xml:space="preserve">
+    <value>Abmeldung erfolgreich.</value>
   </data>
 </root>

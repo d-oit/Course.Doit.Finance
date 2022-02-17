@@ -118,61 +118,61 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
+    <value>Aktionen</value>
   </data>
   <data name="All Groups" xml:space="preserve">
-    <value>All Groups</value>
+    <value>Alle Gruppen</value>
   </data>
   <data name="Bordered" xml:space="preserve">
-    <value>Bordered</value>
+    <value>Rahmen</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Erstellen</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Löschen</value>
   </data>
   <data name="Delete Extended Attribute?" xml:space="preserve">
-    <value>Delete Extended Attribute?</value>
+    <value>Löschen?</value>
   </data>
   <data name="Dense" xml:space="preserve">
-    <value>Dense</value>
+    <value>Kompakt</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Beschreibung</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="Entity Id" xml:space="preserve">
-    <value>Entity Id</value>
+    <value>Id</value>
   </data>
   <data name="Export" xml:space="preserve">
     <value>Export</value>
   </data>
   <data name="Extended Attributes exported" xml:space="preserve">
-    <value>Extended Attributes exported</value>
+    <value>exportiert</value>
   </data>
   <data name="External Id" xml:space="preserve">
-    <value>External Id</value>
+    <value>ExterneId</value>
   </data>
   <data name="Filtered Extended Attributes exported" xml:space="preserve">
-    <value>Filtered Extended Attributes exported</value>
+    <value>Gefilterte Auswahl exportiert</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>Group</value>
+    <value>Gruppe</value>
   </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
   <data name="Include Entity fields (Export)" xml:space="preserve">
-    <value>Include Entity fields (Export)</value>
+    <value>Datenbankfelder hinzufügen (Export)</value>
   </data>
   <data name="Is Active" xml:space="preserve">
-    <value>Is Active</value>
+    <value>Aktiv</value>
   </data>
   <data name="Key" xml:space="preserve">
-    <value>Key</value>
+    <value>Schlüssel</value>
   </data>
   <data name="Manage {0} Extended Attributes" xml:space="preserve">
     <value>Manage {0} Extended Attributes</value>
@@ -181,33 +181,30 @@
     <value>Manage {0} {1}'s Extended Attributes</value>
   </data>
   <data name="No Allowed Actions" xml:space="preserve">
-    <value>No Allowed Actions</value>
+    <value>Aktion nicht erlaubt!</value>
   </data>
   <data name="Not Allowed." xml:space="preserve">
-    <value>Not Allowed.</value>
+    <value>Nicht erlaubt!</value>
   </data>
   <data name="Only Selected Group (Export)" xml:space="preserve">
-    <value>Only Selected Group (Export)</value>
+    <value>Nur ausgewählte Gruppe (Export)</value>
   </data>
   <data name="Owner" xml:space="preserve">
-    <value>Owner</value>
+    <value>Besitzer</value>
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>Reload</value>
+    <value>Aktualisieren</value>
   </data>
   <data name="Search For {0} Extended Attributes" xml:space="preserve">
-    <value>Search For {0} Extended Attributes</value>
+    <value>Suche nach {0} </value>
   </data>
   <data name="Striped" xml:space="preserve">
-    <value>Striped</value>
+    <value>Streifen</value>
   </data>
   <data name="Type" xml:space="preserve">
-    <value>Type</value>
+    <value>Typ</value>
   </data>
   <data name="Value" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="you" xml:space="preserve">
-    <value>you</value>
+    <value>Wert</value>
   </data>
 </root>
