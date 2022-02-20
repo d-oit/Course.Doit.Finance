@@ -201,4 +201,46 @@
   <data name="TotalReturnPercentage" xml:space="preserve">
     <value>Gesamtrendite %</value>
   </data>
+  <data name="Investments" xml:space="preserve">
+    <value>Investionen</value>
+  </data>
+  <data name="Manage Investments." xml:space="preserve">
+    <value>Investitionen verwalten</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="FinanceAccount" xml:space="preserve">
+    <value>Finanzkonto</value>
+  </data>
+  <data name="FinanceAccountName" xml:space="preserve">
+    <value>Finanzkonto</value>
+  </data>
+  <data name="FinanceAccounts" xml:space="preserve">
+    <value>Finanzkonten</value>
+  </data>
+  <data name="InterestClaimSinceDate" xml:space="preserve">
+    <value>Zinsen ab Datum</value>
+  </data>
+  <data name="InvestmentValue" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="Manage Transactions." xml:space="preserve">
+    <value>Buchungen verwalten</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nr</value>
+  </data>
+  <data name="Receiver" xml:space="preserve">
+    <value>Empfänger</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Buchungsvorgänge</value>
+  </data>
+  <data name="TransactionTyp" xml:space="preserve">
+    <value>Typ</value>
+  </data>
 </root>
