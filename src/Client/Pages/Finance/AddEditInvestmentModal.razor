@@ -24,7 +24,7 @@
         <DialogContent>
             <MudContainer Style="max-height: 500px; overflow-y: scroll">
                 <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Text="@_localizer["General"]">
+                    <MudExpansionPanel Text="@_localizer["General"]" IsExpanded="true">
                         <MudGrid>
                             @if (AddEditInvestmentModel.Id != 0)
                             {
@@ -54,7 +54,7 @@
                                 <MudCheckBox @bind-Checked="AddEditInvestmentModel.IsActive" Label="@_localizer["IsActive"]" />
                             </MudItem>
                             <MudItem xs="12" md="6">
-                                <MudDatePicker @bind-Date="AddEditInvestmentModel.InvestmentEndDate" Label="@_localizer["InvestmentEndDate"]" />
+                                <MudDatePicker Editable="true" @bind-Date="AddEditInvestmentModel.InvestmentEndDate" Label="@_localizer["InvestmentEndDate"]" />
                             </MudItem>
                         </MudGrid>
                     </MudExpansionPanel>
@@ -85,7 +85,7 @@
                                 <MudNumericField @bind-Value="AddEditInvestmentModel.TotalReturnPercentage" Label="@_localizer["TotalReturnPercentage"]" />
                             </MudItem>
                             <MudItem xs="12" md="6">
-                                <MudDatePicker @bind-Date="AddEditInvestmentModel.InterestClaimSinceDate" Label="@_localizer["InterestClaimSinceDate"]" />
+                                <MudDatePicker Editable="true" @bind-Date="AddEditInvestmentModel.InterestClaimSinceDate" Label="@_localizer["InterestClaimSinceDate"]" />
                             </MudItem>
                             <MudItem xs="12" md="6">
                                 <MudNumericField @bind-Value="AddEditInvestmentModel.DaysLate" Label="@_localizer["DaysLate"]" Step="14" />

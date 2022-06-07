@@ -24,7 +24,7 @@
         </TitleContent>
         <DialogContent>
             <MudExpansionPanels MultiExpansion="true">
-                <MudExpansionPanel Text="@_localizer["General"]">
+                <MudExpansionPanel Text="@_localizer["General"]" IsExpanded="true">
                     <MudGrid>
                         @if (AddEditTransactionModel.Id != 0)
                         {
@@ -33,7 +33,7 @@
                             </MudItem>
                         }
                         <MudItem xs="12" md="6">
-                            <MudDatePicker @bind-Date="AddEditTransactionModel.DateTime" Label="@_localizer["Date"]" />
+                            <MudDatePicker Editable="true" @bind-Date="AddEditTransactionModel.DateTime" Label="@_localizer["Date"]" />
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudSelect @bind-Value="AddEditTransactionModel.TransactionType" HelperText="@_localizer["TransactionType"]">
@@ -60,7 +60,7 @@
                 <MudExpansionPanel Text=@_localizer["Details"]>
                     <MudGrid>
                         <MudItem xs="12" md="6">
-                            <MudDatePicker @bind-Date="AddEditTransactionModel.PostingDate" Label="@_localizer["PostingDate"]" />
+                            <MudDatePicker Orientation="Orientation.Landscape" Editable="true" @bind-Date="AddEditTransactionModel.PostingDate" Label="@_localizer["PostingDate"]" />
                         </MudItem>
                     </MudGrid>
                 </MudExpansionPanel>

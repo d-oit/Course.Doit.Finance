@@ -243,4 +243,13 @@
   <data name="TransactionTyp" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="Add Transaction" xml:space="preserve">
+    <value>Vorgang hinzufügen</value>
+  </data>
+  <data name="Transcation" xml:space="preserve">
+    <value>Vorgang</value>
+  </data>
+  <data name="Update Transaction" xml:space="preserve">
+    <value>Vorgang ändern</value>
+  </data>
 </root>

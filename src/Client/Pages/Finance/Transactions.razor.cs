@@ -134,7 +134,7 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Finance
                     {
                         if (record.Succeeded)
                         {
-                            parameters.Add(nameof(AddEditInvestmentModal.AddEditInvestmentModel), record.Data);
+                            parameters.Add(nameof(AddEditTransactionModal.AddEditTransactionModel), record.Data);
                         }
                     }
                 }
