@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using BlazorHero.CleanArchitecture.Domain.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Domain.Contracts;
 
 namespace BlazorHero.CleanArchitecture.Application.Interfaces.Repositories
 {
@@ -20,5 +20,6 @@ namespace BlazorHero.CleanArchitecture.Application.Interfaces.Repositories
         Task UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
+        Task<int> GetCountAsync();
     }
 }

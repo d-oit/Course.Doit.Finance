@@ -1,13 +1,13 @@
-﻿using System;
+﻿using BlazorHero.CleanArchitecture.Client.Extensions;
+using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Dashboard;
+using BlazorHero.CleanArchitecture.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Dashboard;
-using BlazorHero.CleanArchitecture.Shared.Constants.Application;
-using BlazorHero.CleanArchitecture.Client.Extensions;
 
 namespace BlazorHero.CleanArchitecture.Client.Pages.Content
 {
@@ -16,8 +16,9 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Content
         [Inject] private IDashboardManager DashboardManager { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
-        [Parameter] public int ProductCount { get; set; }
-        [Parameter] public int BrandCount { get; set; }
+        [Parameter] public decimal CurrentAmount { get; set; }
+        [Parameter] public int FinanceAccountCount { get; set; }
+        [Parameter] public long InvestmentCount { get; set; }
         [Parameter] public int DocumentCount { get; set; }
         [Parameter] public int DocumentTypeCount { get; set; }
         [Parameter] public int DocumentExtendedAttributeCount { get; set; }
@@ -49,8 +50,9 @@ namespace BlazorHero.CleanArchitecture.Client.Pages.Content
             var response = await DashboardManager.GetDataAsync();
             if (response.Succeeded)
             {
-                ProductCount = response.Data.ProductCount;
-                BrandCount = response.Data.BrandCount;
+                CurrentAmount = response.Data.CurrentAmount;
+                FinanceAccountCount = response.Data.FinanceAccountCount;
+                InvestmentCount = response.Data.InvestmentCount;
                 DocumentCount = response.Data.DocumentCount;
                 DocumentTypeCount = response.Data.DocumentTypeCount;
                 DocumentExtendedAttributeCount = response.Data.DocumentExtendedAttributeCount;

@@ -10,12 +10,21 @@
 else
 {
     <MudGrid>
+         <MudItem xs="12" sm="6" md="3">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                <MudIcon Icon="@Icons.Material.Filled.PanoramaPhotosphereSelect" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Current Amount"]</MudText>
+                    <MudText Typo="Typo.h5">@CurrentAmount</MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
         <MudItem xs="12" sm="6" md="3">
             <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
                 <MudIcon Icon="@Icons.Material.Filled.ViewCarousel" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Products"]</MudText>
-                    <MudText Typo="Typo.h5">@ProductCount</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["FinanceAccounts"]</MudText>
+                    <MudText Typo="Typo.h5">@FinanceAccountCount</MudText>
                 </div>
             </MudPaper>
         </MudItem>
@@ -23,8 +32,8 @@ else
             <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
                 <MudIcon Icon="@Icons.Material.Filled.PanoramaPhotosphereSelect" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Brands"]</MudText>
-                    <MudText @bind-Value="@BrandCount" Typo="Typo.h5">@BrandCount</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Investments"]</MudText>
+                    <MudText  Typo="Typo.h5">@InvestmentCount</MudText>
                 </div>
             </MudPaper>
         </MudItem>
@@ -33,25 +42,25 @@ else
                 <MudIcon Icon="@Icons.Material.Filled.AttachFile" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 <div>
                     <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Documents"]</MudText>
-                    <MudText @bind-Value="@DocumentCount" Typo="Typo.h5">@DocumentCount</MudText>
+                    <MudText  Typo="Typo.h5">@DocumentCount</MudText>
                 </div>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" >
                 <MudIcon Icon="@Icons.Material.Filled.FileCopy" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 <div>
                     <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Document Types"]</MudText>
-                    <MudText @bind-Value="@DocumentTypeCount" Typo="Typo.h5">@DocumentTypeCount</MudText>
+                    <MudText  Typo="Typo.h5">@DocumentTypeCount</MudText>
                 </div>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="6" md="3">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
                 <MudIcon Icon="@Icons.Material.Filled.Assignment" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 <div>
                     <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@_localizer["Document Extended Attributes"]</MudText>
-                    <MudText @bind-Value="@DocumentExtendedAttributeCount" Typo="Typo.h5">@DocumentExtendedAttributeCount</MudText>
+                    <MudText  Typo="Typo.h5">@DocumentExtendedAttributeCount</MudText>
                 </div>
             </MudPaper>
         </MudItem>

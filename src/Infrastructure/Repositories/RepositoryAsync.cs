@@ -38,6 +38,13 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<int> GetCountAsync()
+        {
+            return await _dbContext
+                .Set<T>()
+                .CountAsync();
+        }
+
         public async Task<T> GetByIdAsync(TId id)
         {
             return await _dbContext.Set<T>().FindAsync(id);

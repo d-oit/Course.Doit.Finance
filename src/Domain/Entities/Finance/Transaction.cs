@@ -38,7 +38,7 @@ namespace BlazorHero.CleanArchitecture.Domain.Entities.Finance
         public DateTime? DateTime { get; set; } = System.DateTime.Now.Date; // https://stackoverflow.com/questions/65676683/mudblazor-datepicker-binding-works-one-way-only
 
         [DataType(DataType.Date)]
-        public DateTime? PostingDate { get; set; }
+        public DateTime? PostingDate { get; set; } = System.DateTime.Now.Date;
 
         [StringLength(100)]
         public string DocumentNo { get; set; } = "";

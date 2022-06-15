@@ -3,9 +3,7 @@ using BlazorHero.CleanArchitecture.Application.Interfaces.Repositories;
 using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
 using BlazorHero.CleanArchitecture.Shared.Wrapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,10 +29,6 @@ namespace BlazorHero.CleanArchitecture.Application.Features.Finance.Transactions
 
         public async Task<Result<long>> Handle(AddEditTransactionCommand command, CancellationToken cancellationToken)
         {
-            if (await _unitOfWork.Repository<Transaction>().Entities.Where(s => s.Id != command.Id).AnyAsync(cancellationToken: cancellationToken))
-            {
-                return await Result<long>.FailAsync("Record is already existed");
-            }
 
             if (command.Id == 0)
             {

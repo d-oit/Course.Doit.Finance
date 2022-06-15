@@ -1,6 +1,5 @@
 using BlazorHero.CleanArchitecture.Application.Interfaces.Repositories;
 using BlazorHero.CleanArchitecture.Domain.Entities.Finance;
-using System;
 
 namespace BlazorHero.CleanArchitecture.Infrastructure.Repositories
 {
@@ -12,5 +11,6 @@ namespace BlazorHero.CleanArchitecture.Infrastructure.Repositories
         {
             _repository = repository;
         }
+
     }
 }
